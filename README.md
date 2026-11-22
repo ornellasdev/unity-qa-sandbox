@@ -2,7 +2,7 @@
 
 An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri Ornellas**.
 
-**Status:** Gameplay and test source published. First Edit Mode suite **reported as 9/9 passed** by the tester on **2026-11-22**; screenshot and environment metadata pending. Manual gameplay testing has not yet been reported.
+**Status:** Gameplay and test source published. First Edit Mode suite **reported as 9/9 passed** by the tester on **2026-11-22**; Test Runner screenshot and remaining environment metadata pending. Manual gameplay testing has not yet been reported.
 
 ## Features
 - 3D graybox demo scene generated using **Tools > QA Sandbox > Create Demo Scene**
@@ -34,13 +34,14 @@ This repository is an **Assets scaffold**, not an entire serialized Unity projec
 
 📄 [Test Execution Report — RUN-001](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
 
-> These are self-reported local Unity Test Runner results. Screenshots, exact Unity version, and CI validation are pending. Do not interpret unit test passes as proof of complete gameplay validation.
+> These are self-reported local Unity Test Runner results. Test Runner screenshot and CI validation are pending. Unity version: **6.6 (6000.6.10f1)**, confirmed by the tester's About Unity screenshot. Do not interpret unit test passes as proof of complete gameplay validation.
 
 ## Roadmap
 - [x] Gameplay components and test source authored
 - [x] Nine NUnit Edit Mode test methods authored
 - [x] First Edit Mode execution reported: 9/9 pass
-- [ ] Capture screenshot and editor environment details
+- [x] Confirm Unity Editor version: 6.6 (6000.6.10f1)
+- [ ] Capture Test Runner screenshot and remaining environment details
 - [ ] Run manual test cases and report observed defects
 - [ ] Add Play Mode tests and CI
 
