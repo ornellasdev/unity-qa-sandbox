@@ -10,7 +10,7 @@
 | Report date | 2026-11-22 |
 | Executor | Yuri Ornellas |
 | Source commit under test | Not recorded at execution time |
-| Unity Editor version | Not recorded — pending confirmation |
+| Unity Editor version | Unity 6.6 (6000.6.10f1) — confirmed by tester screenshot |
 | Operating system | Not recorded — pending confirmation |
 | Evidence | Test Runner screenshot / exported results pending upload |
 | Source of result | Tester-reported results (not independently verified by CI) |
@@ -43,12 +43,12 @@ The tester stated that all nine tests appeared as passing in Unity Test Runner E
 
 - Manual gameplay scenarios UNITY-001 to UNITY-004 have **not** been reported as executed.
 - Edit Mode unit tests do **not** verify scene integration, physics, collision behavior, or actual playability.
-- Screenshot, exact Unity version, OS and commit hash from the test environment remain to be added.
+- Test Runner screenshot, OS and commit hash from the test environment remain to be added. The Unity About window screenshot confirms editor version only, not test results.
 
 ## Evidence checklist
 
 - [ ] Add screenshot of Unity Test Runner showing nine passing tests to `Evidence/RUN-001/`
-- [ ] Record exact Unity Editor version
+- [x] Record exact Unity Editor version from About Unity screenshot (Unity 6.6, 6000.6.10f1)
 - [ ] Record OS and project commit
 - [ ] Optionally export XML test results
 - [ ] Attach manual gameplay validation after it has been performed
