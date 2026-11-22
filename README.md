@@ -2,7 +2,7 @@
 
 An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri Ornellas**.
 
-**Status:** Gameplay and test source published. First Edit Mode suite **reported as 9/9 passed** by the tester on **2026-11-22**; Test Runner screenshot and remaining environment metadata pending. Manual gameplay testing has not yet been reported.
+**Status:** Gameplay and test source published. First Edit Mode suite **9/9 passed, supported by tester-provided Test Runner screenshot** on **2026-11-22**; repository-hosted screenshot and remaining environment metadata pending. Manual gameplay testing has not yet been reported.
 
 ## Features
 - 3D graybox demo scene generated using **Tools > QA Sandbox > Create Demo Scene**
@@ -26,22 +26,23 @@ This repository is an **Assets scaffold**, not an entire serialized Unity projec
 
 | Coverage | Type | Reported status |
 |---|---|---|
-| Health logic (7 test methods) | NUnit Edit Mode | ✅ 7/7 Passed — tester reported |
-| Checkpoint logic (2 test methods) | NUnit Edit Mode | ✅ 2/2 Passed — tester reported |
+| Health logic (7 test methods) | NUnit Edit Mode | ✅ 7/7 Passed — screenshot reviewed |
+| Checkpoint logic (2 test methods) | NUnit Edit Mode | ✅ 2/2 Passed — screenshot reviewed |
 | Movement, jump, collision, triggers, respawn | Manual | Not Run / not reported |
 
 **Automated Edit Mode result: 9 passed, 0 failed (100%).**
 
 📄 [Test Execution Report — RUN-001](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
 
-> These are self-reported local Unity Test Runner results. Test Runner screenshot and CI validation are pending. Unity version: **6.6 (6000.6.10f1)**, confirmed by the tester's About Unity screenshot. Do not interpret unit test passes as proof of complete gameplay validation.
+> The Test Runner screenshot has been visually reviewed in chat (9 passing tests, 0 failures); uploading it to this repository and independent CI validation are pending. Unity version: **6.6 (6000.6.10f1)**, confirmed by the tester's About Unity screenshot. Do not interpret unit test passes as proof of complete gameplay validation.
 
 ## Roadmap
 - [x] Gameplay components and test source authored
 - [x] Nine NUnit Edit Mode test methods authored
 - [x] First Edit Mode execution reported: 9/9 pass
 - [x] Confirm Unity Editor version: 6.6 (6000.6.10f1)
-- [ ] Capture Test Runner screenshot and remaining environment details
+- [x] Review Test Runner screenshot (9 passed, 0 failed)
+- [ ] Upload the screenshot to the repository and record remaining environment details
 - [ ] Run manual test cases and report observed defects
 - [ ] Add Play Mode tests and CI
 
