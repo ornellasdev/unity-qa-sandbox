@@ -11,7 +11,7 @@
 | Executor | Yuri Ornellas |
 | Source commit under test | Not recorded at execution time |
 | Unity Editor version | Unity 6.6 (6000.6.10f1) — confirmed by tester screenshot |
-| Operating system | Not recorded — pending confirmation |
+| Operating system | CachyOS (Linux) — tester confirmed; release/kernel not recorded |
 | Evidence | [Test Runner screenshot](../Evidence/RUN-001.png) committed to repository |
 | Source of result | Screenshot visually reviewed (9 passed, 0 failed, 0 other); not independently verified by CI |
 
@@ -43,19 +43,20 @@ A screenshot provided by the tester shows Unity Test Runner in Edit Mode with 9 
 
 - Manual gameplay scenarios UNITY-001 to UNITY-004 have **not** been reported as executed.
 - Edit Mode unit tests do **not** verify scene integration, physics, collision behavior, or actual playability.
-- OS and commit hash from the test environment remain to be added. The Unity About window screenshot confirms editor version; the Test Runner screenshot confirms the displayed nine passing tests. The Unity About window screenshot confirms editor version only, not test results.
+- CachyOS release/kernel and the tested commit hash remain to be added. The Unity About window screenshot confirms editor version; the Test Runner screenshot confirms the displayed nine passing tests. The Unity About window screenshot confirms editor version only, not test results.
 
 ## Evidence checklist
 
 - [x] Review tester-provided screenshot showing nine passing tests
 - [x] Upload original Test Runner screenshot to `Evidence/RUN-001.png`
 - [x] Record exact Unity Editor version from About Unity screenshot (Unity 6.6, 6000.6.10f1)
-- [ ] Record OS and project commit
+- [x] Record operating system: CachyOS (Linux)
+- [ ] Record tested commit and optional CachyOS release/kernel
 - [ ] Optionally export XML test results
 - [ ] Attach manual gameplay validation after it has been performed
 
 ## Next steps
 
-1. Record OS and tested commit for reproducibility.
+1. Record the tested commit and optional CachyOS release/kernel for reproducibility.
 2. Run and document the manual gameplay test plan.
 3. Add Play Mode integration tests and automated CI execution.
