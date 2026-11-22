@@ -2,7 +2,7 @@
 
 An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri Ornellas**.
 
-**Status:** Game prototype source published. The Edit Mode NUnit suite passed **9/9** in the tester's Unity Test Runner on **2026-11-22**, with [screenshot evidence](Evidence/RUN-001.png). Manual gameplay RUN-002 has **8 tester-reported passing checks**, including health restoration to 100 both with and without an activated checkpoint. Final tested commit and repository-hosted RUN-002 evidence remain pending.
+**Status:** Game prototype source published. The Edit Mode NUnit suite passed **9/9** in the tester's Unity Test Runner on **2026-11-22**, with [screenshot evidence](Evidence/RUN-001.png). Manual gameplay RUN-002 has **8 tester-reported passing checks**, including health restoration to 100 both with and without an activated checkpoint. The corrected gameplay scripts were published in commit [`9406fca`](https://github.com/ornellasdev/unity-qa-sandbox/commit/9406fca3d6fd94abf6375a7043eed573f613af94); the exact prior test revision and repository-hosted RUN-002 evidence remain pending.
 
 ## Features
 - Graybox scene generator: **Tools > QA Sandbox > Create Demo Scene**
@@ -38,7 +38,8 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - [x] First Edit Mode execution: 9/9 passed with screenshot evidence
 - [x] Test environment recorded: CachyOS Linux / Unity 6.6 (6000.6.10f1)
 - [x] Eight manual gameplay checks reported as passing in RUN-002, including both health restoration scenarios
-- [ ] Publish local trigger/respawn fix and record exact tested commit
+- [x] Publish trigger/respawn fix: `9406fca`
+- [ ] Recheck the committed version and record its test commit
 - [ ] Upload RUN-002 Console/gameplay evidence to the repository
 - [ ] Add Play Mode integration tests and CI
 
