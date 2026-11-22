@@ -2,7 +2,7 @@
 
 An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri Ornellas**.
 
-**Status:** Source code authored; **not yet run or validated inside Unity**. No automated test results are claimed.
+**Status:** Gameplay and test source published. First Edit Mode suite **reported as 9/9 passed** by the tester on **2026-11-22**; screenshot and environment metadata pending. Manual gameplay testing has not yet been reported.
 
 ## Features
 - 3D graybox demo scene generated using **Tools > QA Sandbox > Create Demo Scene**
@@ -23,19 +23,24 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 This repository is an **Assets scaffold**, not an entire serialized Unity project. The scene must be generated in the Editor first.
 
 ## Test status
-| Coverage | Type | Status |
-|---|---|---|
-| Health logic (7 test methods) | NUnit Edit Mode | Not Run |
-| Checkpoint logic (2 test methods) | NUnit Edit Mode | Not Run |
-| Movement, jump, collision, triggers, respawn | Manual | Not Run |
 
-See [manual test plan](Docs/TEST_PLAN.md) and [bug report template](Docs/BUG_REPORT_TEMPLATE.md). Only record bugs and pass results after actually reproducing/observing them.
+| Coverage | Type | Reported status |
+|---|---|---|
+| Health logic (7 test methods) | NUnit Edit Mode | ✅ 7/7 Passed — tester reported |
+| Checkpoint logic (2 test methods) | NUnit Edit Mode | ✅ 2/2 Passed — tester reported |
+| Movement, jump, collision, triggers, respawn | Manual | Not Run / not reported |
+
+**Automated Edit Mode result: 9 passed, 0 failed (100%).**
+
+📄 [Test Execution Report — RUN-001](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
+
+> These are self-reported local Unity Test Runner results. Screenshots, exact Unity version, and CI validation are pending. Do not interpret unit test passes as proof of complete gameplay validation.
 
 ## Roadmap
 - [x] Gameplay components and test source authored
 - [x] Nine NUnit Edit Mode test methods authored
-- [ ] Compile project in Unity
-- [ ] Execute Edit Mode tests and collect evidence
+- [x] First Edit Mode execution reported: 9/9 pass
+- [ ] Capture screenshot and editor environment details
 - [ ] Run manual test cases and report observed defects
 - [ ] Add Play Mode tests and CI
 
