@@ -13,4 +13,4 @@ Automated NUnit results are documented separately in [RUN-001](TEST_EXECUTION_RE
 | UNITY-005 | Run HealthModel NUnit suite | Health boundaries, resets, invalid inputs behave as intended | 7/7 Passed — Test Runner screenshot |
 | UNITY-006 | Run CheckpointModel NUnit suite | Latest checkpoint is stored | 2/2 Passed — Test Runner screenshot |
 
-Note: trigger/respawn regression was investigated and locally modified source is not yet confirmed pushed to GitHub. Record exact tested commit, reproduction steps, actual observations, evidence and any defect IDs. Do not infer an unobserved result.
+The trigger/respawn fix is published in commit [`9406fca`](https://github.com/ornellasdev/unity-qa-sandbox/commit/9406fca3d6fd94abf6375a7043eed573f613af94). A subsequent [RUN-003 regression](TEST_EXECUTION_REPORT_RUN-003.md) was reported PASS for initial respawn, checkpoint respawn, and 9/9 Edit Mode tests. New screenshot evidence and confirmation of a clean working tree remain pending. Do not infer an unobserved result.
