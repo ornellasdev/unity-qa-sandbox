@@ -12,14 +12,14 @@
 | Source commit under test | Not recorded at execution time |
 | Unity Editor version | Unity 6.6 (6000.6.10f1) — confirmed by tester screenshot |
 | Operating system | Not recorded — pending confirmation |
-| Evidence | Test Runner screenshot / exported results pending upload |
-| Source of result | Tester-reported results (not independently verified by CI) |
+| Evidence | Tester-provided Unity Test Runner screenshot reviewed in chat; repository image upload pending |
+| Source of result | Screenshot visually reviewed (9 passed, 0 failed, 0 other); not independently verified by CI |
 
 ## Results
 
 | Suite | Tests | Passed | Failed | Status |
 |---|---:|---:|---:|---|
-| HealthModelTests | 7 | 7 | 0 | PASS — tester reported |
+| HealthModelTests | 7 | 7 | 0 | PASS — screenshot reviewed |
 | CheckpointModelTests | 2 | 2 | 0 | PASS — tester reported |
 | **Total** | **9** | **9** | **0** | **PASS — tester reported** |
 
@@ -27,7 +27,7 @@
 
 ### Verified by the tester's report
 
-The tester stated that all nine tests appeared as passing in Unity Test Runner Edit Mode. This report records that statement; it is **not a claim of independent execution** in GitHub Actions or by the repository maintainer's automation.
+A screenshot provided by the tester shows Unity Test Runner in Edit Mode with 9 passing tests (green checkmarks), 0 failed (red icon), and 0 in the other visible status counters. It shows two passing CheckpointModelTests and seven passing HealthModelTests. The screenshot was reviewed in the conversation but has **not yet been uploaded into the repository**. This is **not** an independently executed CI run.
 
 ### Coverage
 
@@ -43,11 +43,12 @@ The tester stated that all nine tests appeared as passing in Unity Test Runner E
 
 - Manual gameplay scenarios UNITY-001 to UNITY-004 have **not** been reported as executed.
 - Edit Mode unit tests do **not** verify scene integration, physics, collision behavior, or actual playability.
-- Test Runner screenshot, OS and commit hash from the test environment remain to be added. The Unity About window screenshot confirms editor version only, not test results.
+- Repository-hosted Test Runner screenshot, OS and commit hash from the test environment remain to be added. The Unity About window screenshot confirms editor version; the Test Runner screenshot confirms the displayed nine passing tests. The Unity About window screenshot confirms editor version only, not test results.
 
 ## Evidence checklist
 
-- [ ] Add screenshot of Unity Test Runner showing nine passing tests to `Evidence/RUN-001/`
+- [x] Review tester-provided screenshot showing nine passing tests
+- [ ] Upload original Test Runner screenshot to `Evidence/RUN-001/`
 - [x] Record exact Unity Editor version from About Unity screenshot (Unity 6.6, 6000.6.10f1)
 - [ ] Record OS and project commit
 - [ ] Optionally export XML test results
