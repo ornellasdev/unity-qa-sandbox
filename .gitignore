@@ -11,3 +11,4 @@
 *.sln
 *.user
 .DS_Store
+*.slnx
