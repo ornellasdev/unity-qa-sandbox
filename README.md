@@ -27,9 +27,9 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 | WASD movement, jump, collision, checkpoint respawn, airborne double-jump prevention, initial-spawn respawn | Manual | ✅ 6 observed checks passed — tester reported |
 | Full-health restoration at initial spawn and activated checkpoint | Manual | ✅ 2 scenarios passed — tester reported; Console screenshot reviewed in chat |
 
-**Automated Edit Mode result:** 9 passed, 0 failed (100%). **RUN-002:** Eight observed checks passed; original locally edited gameplay code still needs to be committed and linked to a tested revision.
+**Automated Edit Mode result:** 9 passed, 0 failed (100%) in RUN-001. **RUN-002:** Eight gameplay observations passed. **RUN-003 regression (tester-reported against fix `9406fca`):** initial respawn PASS, checkpoint respawn PASS, Edit Mode 9/9 PASS. Evidence and clean working tree confirmation for RUN-003 remain pending.
 
-🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
+🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [RUN-003 regression report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
 
 > RUN-001 has screenshot evidence of local Unity Test Runner results, not independent CI validation. RUN-002 is based on tester-reported manual observations, with Console screenshot reviewed in chat but not yet uploaded to the repository. Environment: **CachyOS (Linux)** and **Unity 6.6 (6000.6.10f1)**; exact tested commit is not recorded.
 
@@ -39,7 +39,8 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - [x] Test environment recorded: CachyOS Linux / Unity 6.6 (6000.6.10f1)
 - [x] Eight manual gameplay checks reported as passing in RUN-002, including both health restoration scenarios
 - [x] Publish trigger/respawn fix: `9406fca`
-- [ ] Recheck the committed version and record its test commit
+- [x] Tester-reported regression RUN-003 on fix commit `9406fca`: 3/3 checks passed
+- [ ] Confirm clean working tree and attach new RUN-003 evidence
 - [ ] Upload RUN-002 Console/gameplay evidence to the repository
 - [ ] Add Play Mode integration tests and CI
 
