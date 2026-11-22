@@ -15,7 +15,7 @@ This report documents **tester-reported regression results** following the damag
 | Test method | Manual gameplay regression + local Unity Test Runner Edit Mode |
 | Result source | Tester-reported execution results in conversation |
 | Screenshot/log evidence for RUN-003 | Pending |
-| Clean working tree / absence of local modifications | Not independently confirmed |
+| Working tree check (subsequent snapshot) | `git status --short` showed only `?? unity-qa-sandbox/` (untracked nested folder), with no tracked-file modifications listed; exact state at test time and active Unity project path not independently verified |
 
 ## Executed checks
 
@@ -31,7 +31,7 @@ This report documents **tester-reported regression results** following the damag
 
 - Previous RUN-002 observations included restoration to 100 health in both respawn scenarios, with a Console screenshot shared in conversation. This RUN-003 submission confirms the two respawn scenarios and all nine NUnit tests, but does **not separately report new health values or a new screenshot**. A new numeric health-restoration assertion was **not** added to RUN-003.
 - The tester identified `9406fca` as the regression target; GitHub confirms it is the commit containing the corrected `DamageZone.cs` and `PlayerRespawn.cs` files.
-- The tester had previously displayed a shell prompt suggesting possible local changes. The clean state of the Unity working tree at execution time was not verified, so this report does not claim an independently reproduced run on a pristine checkout.
+- The tester had previously displayed a shell prompt suggesting possible local changes. A later screenshot of `git status --short` showed only an untracked nested directory (`?? unity-qa-sandbox/`); there were no modified tracked files listed. This does **not** establish which project directory was open in Unity during RUN-003 or prove that the working tree was identical at execution time, so this report does not claim independently reproduced results on a pristine checkout.
 - No CI job or automated Unity Play Mode regression execution was run or evidenced here.
 - Tests beyond the three checks listed above are **not included or implicitly passed**.
 
@@ -39,7 +39,8 @@ This report documents **tester-reported regression results** following the damag
 
 - [ ] Attach a screenshot of the RUN-003 Test Runner results
 - [ ] Capture a Console/gameplay recording for both respawn cases
-- [ ] Confirm local working tree with `git status --short` and record any modified files
+- [x] Review subsequent `git status --short`: no tracked changes; untracked nested `unity-qa-sandbox/` present
+- [ ] Confirm Unity Editor project path and whether the nested folder contains a second project
 - [ ] Record optional CachyOS release/kernel information
 - [ ] Add automated Play Mode tests
 - [ ] Add GitHub Actions / CI, if suitable for the Unity project
