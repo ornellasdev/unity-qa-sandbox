@@ -16,14 +16,25 @@ namespace UnityQASandbox
 
         public void SetCheckpoint(Vector3 position) => checkpoints.Activate(position);
 
-        public void Respawn()
-        {
-            controller.enabled = false;
-            transform.position = checkpoints.SpawnPosition;
-            controller.enabled = true;
-            GetComponent<PlayerHealth>()?.RestoreFullHealth();
-            GetComponent<PlayerMovement>()?.ResetVelocity();
-            Debug.Log("Player respawned", this);
-        }
+        
+public void Respawn()
+{
+    controller.enabled = false;
+    transform.position = checkpoints.SpawnPosition;
+    controller.enabled = true;
+
+    GetComponent<PlayerHealth>()?.RestoreFullHealth();
+
+    var health = GetComponent<PlayerHealth>();
+
+    if (health != null)
+    {
+        Debug.Log("Health after respawn: " + health.CurrentHealth);
+    }
+
+    GetComponent<PlayerMovement>()?.ResetVelocity();
+    Debug.Log("Player respawned", this);
+}
+
     }
 }
