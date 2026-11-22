@@ -2,52 +2,44 @@
 
 An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri Ornellas**.
 
-**Status:** Gameplay and test source published. First Edit Mode suite **9/9 passed, supported by tester-provided Test Runner screenshot** on **2026-11-22**; screenshot uploaded to the repository; tested commit and CachyOS release details pending. Initial manual gameplay observations have been recorded in RUN-002; remaining formal assertions are pending.
+**Status:** Game prototype source published. The Edit Mode NUnit suite passed **9/9** in the tester's Unity Test Runner on **2026-11-22**, with [screenshot evidence](Evidence/RUN-001.png). Manual gameplay RUN-002 has **6 reported passing checks**, while health restoration after respawn is still pending verification.
 
 ## Features
-- 3D graybox demo scene generated using **Tools > QA Sandbox > Create Demo Scene**
+- Graybox scene generator: **Tools > QA Sandbox > Create Demo Scene**
 - WASD / arrow-key movement, Space to jump, gravity, collision
 - Health, hazards, checkpoints and respawn
-- Pure, testable gameplay logic and **9 NUnit Edit Mode tests**
-- English QA test plan and bug-report template
+- **9 NUnit Edit Mode tests** of gameplay models
+- English test plans and execution reports
 
 ## Setup
-1. Create a **new Unity 6 3D Core project** in Unity Hub.
-2. Copy this repository's `Assets/` folder into the project.
-3. Install **Test Framework** via Package Manager, if needed.
-4. Set **Active Input Handling** to **Both** or **Input Manager (Old)** in Project Settings > Player. Restart Unity if prompted.
-5. Select **Tools > QA Sandbox > Create Demo Scene**; a scene is generated at `Assets/Scenes/QASandbox.unity`.
-6. Press **Play**. Walk into the green checkpoint, then the red damage zone.
-7. Open **Window > General > Test Runner**, choose **Edit Mode**, then **Run All**.
-
-This repository is an **Assets scaffold**, not an entire serialized Unity project. The scene must be generated in the Editor first.
+1. Open the complete Unity project using **Unity 6.6 (6000.6.10f1)** (the editor version used by the tester).
+2. Set **Active Input Handling** to **Both** or **Input Manager (Old)** under Project Settings > Player if necessary.
+3. Open `Assets/Scenes/QASandbox.unity`; generate via **Tools > QA Sandbox > Create Demo Scene** if it does not exist.
+4. Press **Play** and test movement, jump, collisions, hazard and checkpoint.
+5. Open **Window > General > Test Runner**, choose **Edit Mode**, then **Run All**.
 
 ## Test status
 
-| Coverage | Type | Reported status |
+| Coverage | Type | Status |
 |---|---|---|
-| Health logic (7 test methods) | NUnit Edit Mode | ✅ 7/7 Passed — screenshot reviewed |
-| Checkpoint logic (2 test methods) | NUnit Edit Mode | ✅ 2/2 Passed — screenshot reviewed |
-| WASD movement, basic jump, obstacle collision, checkpoint respawn location | Manual | ✅ 4/4 observed behaviors passed — tester reported |
-| Airborne re-jump, initial-spawn hazard, health restoration | Manual | Pending |
+| Health logic (7 methods) | NUnit Edit Mode | ✅ 7/7 Passed — screenshot reviewed |
+| Checkpoint logic (2 methods) | NUnit Edit Mode | ✅ 2/2 Passed — screenshot reviewed |
+| WASD movement, jump, collision, checkpoint respawn, airborne double-jump prevention, initial-spawn respawn | Manual | ✅ 6 observed checks passed — tester reported |
+| Health restoration after respawn (initial and checkpoint) | Manual | Pending |
 
-**Automated Edit Mode result: 9 passed, 0 failed (100%).**
+**Automated Edit Mode result:** 9 passed, 0 failed (100%). **RUN-002:** Six observed checks passed; full-health restoration not yet verified.
 
 🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
 
-> The Test Runner screenshot has been visually reviewed in chat (9 passing tests, 0 failures); the image is now available in this repository; independent CI validation is pending. OS: **CachyOS (Linux)**. Unity version: **6.6 (6000.6.10f1)**, confirmed by the tester's About Unity screenshot. Do not interpret unit test passes as proof of complete gameplay validation.
+> RUN-001 has screenshot evidence of local Unity Test Runner results, not independent CI validation. RUN-002 is based on tester-reported manual observations with no gameplay evidence yet. Environment: **CachyOS (Linux)** and **Unity 6.6 (6000.6.10f1)**; exact tested commit is not recorded.
 
 ## Roadmap
-- [x] Gameplay components and test source authored
-- [x] Nine NUnit Edit Mode test methods authored
-- [x] First Edit Mode execution reported: 9/9 pass
-- [x] Confirm Unity Editor version: 6.6 (6000.6.10f1)
-- [x] Review Test Runner screenshot (9 passed, 0 failed)
-- [x] Upload Test Runner screenshot to `Evidence/RUN-001.png`
-- [x] Record test operating system: CachyOS (Linux)
-- [ ] Record tested commit and optional CachyOS release/kernel
-- [x] Record four passing basic gameplay observations in RUN-002
-- [ ] Finish all formal manual test assertions and capture evidence
-- [ ] Add Play Mode tests and CI
+- [x] Gameplay components and automated tests authored
+- [x] First Edit Mode execution: 9/9 passed with screenshot evidence
+- [x] Test environment recorded: CachyOS Linux / Unity 6.6 (6000.6.10f1)
+- [x] Six basic manual gameplay checks reported as passing in RUN-002
+- [ ] Verify full health restoration after respawn
+- [ ] Add gameplay evidence and record exact tested commit
+- [ ] Add Play Mode integration tests and CI
 
 **Author:** [Yuri Ornellas](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/)
