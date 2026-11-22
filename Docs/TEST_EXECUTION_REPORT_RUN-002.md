@@ -21,26 +21,29 @@
 | Jump activation | Space makes the character jump | PASS — reported |
 | Obstacle collision | Gray obstacles prevent passing through | PASS — reported |
 | Checkpoint recovery | After entering green checkpoint and red hazard, character respawns at green checkpoint | PASS — reported |
+| Airborne double-jump prevention | Character did not jump again while airborne | PASS — reported |
+| Respawn without checkpoint | After red hazard without green checkpoint activation, character returned to initial spawn | PASS — reported |
+| Full-health restoration after respawn | Not yet checked | PENDING |
 
-**Summary: 4/4 basic observed behaviors passed.** This is a count of confirmed behaviors, not four fully completed formal test cases.
+**Summary:** Six observed gameplay behaviors reported passing; no failures reported. Health restoration remains unverified. These are individual observed checks, not a claim that all formal test cases are complete.
 
 ## Formal test-case tracking
 
 | Test case | Scope | Status |
 |---|---|---|
-| UNITY-001 | Movement against collision geometry | PASS for reported WASD and obstacle collision |
-| UNITY-002 | Grounded jump and attempted airborne double-jump | PARTIAL: jump activation PASS; airborne re-jump not checked |
-| UNITY-003 | Red hazard before checkpoint, initial spawn, full-health restoration | NOT RUN / NOT CONFIRMED |
-| UNITY-004 | Checkpoint activation, hazard, respawn and health | PARTIAL: respawn location PASS; full-health restoration not checked |
+| UNITY-001 | Movement against collision geometry | PASS — tester reported WASD movement and collision |
+| UNITY-002 | Grounded jump and airborne double-jump prevention | PASS — tester reported both checks |
+| UNITY-003 | Red hazard before checkpoint; initial spawn; full-health restoration | PARTIAL — initial-position respawn PASS; full-health restoration pending |
+| UNITY-004 | Checkpoint activation; hazard; checkpoint respawn; full-health restoration | PARTIAL — checkpoint respawn location PASS; full-health restoration pending |
 
 ## Limitations and follow-up
 
-- Results are based on the tester's messages; no footage or Unity Player log was submitted for RUN-002.
+- All RUN-002 results are **tester-reported manual observations**; no video, gameplay screenshot, or log has yet been attached to this run.
 - No specific defect was reported in the checked behaviors.
 - Do not treat these observations as automated Play Mode test results.
-- Confirm the exact tested Git commit, because the repository may advance after this local run.
-- Run remaining assertions: attempt jump while mid-air, test the hazard before activating a checkpoint, and verify full health after respawn.
-- Attach evidence under `Evidence/RUN-002/` if captured.
+- Confirm the exact tested Git commit; the repository may have changed after the local run.
+- **Remaining check:** verify that `PlayerHealth.CurrentHealth` returns to maximum after respawn for both initial-spawn and checkpoint scenarios.
+- Attach evidence to `Evidence/RUN-002/` when available.
 
 ## Related materials
 
