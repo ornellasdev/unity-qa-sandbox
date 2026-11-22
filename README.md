@@ -2,7 +2,7 @@
 
 An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri Ornellas**.
 
-**Status:** Gameplay and test source published. First Edit Mode suite **9/9 passed, supported by tester-provided Test Runner screenshot** on **2026-11-22**; screenshot uploaded to the repository; OS and tested commit pending. Manual gameplay testing has not yet been reported.
+**Status:** Gameplay and test source published. First Edit Mode suite **9/9 passed, supported by tester-provided Test Runner screenshot** on **2026-11-22**; screenshot uploaded to the repository; tested commit and CachyOS release details pending. Manual gameplay testing has not yet been reported.
 
 ## Features
 - 3D graybox demo scene generated using **Tools > QA Sandbox > Create Demo Scene**
@@ -34,7 +34,7 @@ This repository is an **Assets scaffold**, not an entire serialized Unity projec
 
 🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [Test Execution Report — RUN-001](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
 
-> The Test Runner screenshot has been visually reviewed in chat (9 passing tests, 0 failures); the image is now available in this repository; independent CI validation is pending. Unity version: **6.6 (6000.6.10f1)**, confirmed by the tester's About Unity screenshot. Do not interpret unit test passes as proof of complete gameplay validation.
+> The Test Runner screenshot has been visually reviewed in chat (9 passing tests, 0 failures); the image is now available in this repository; independent CI validation is pending. OS: **CachyOS (Linux)**. Unity version: **6.6 (6000.6.10f1)**, confirmed by the tester's About Unity screenshot. Do not interpret unit test passes as proof of complete gameplay validation.
 
 ## Roadmap
 - [x] Gameplay components and test source authored
@@ -43,7 +43,8 @@ This repository is an **Assets scaffold**, not an entire serialized Unity projec
 - [x] Confirm Unity Editor version: 6.6 (6000.6.10f1)
 - [x] Review Test Runner screenshot (9 passed, 0 failed)
 - [x] Upload Test Runner screenshot to `Evidence/RUN-001.png`
-- [ ] Record operating system and tested commit
+- [x] Record test operating system: CachyOS (Linux)
+- [ ] Record tested commit and optional CachyOS release/kernel
 - [ ] Run manual test cases and report observed defects
 - [ ] Add Play Mode tests and CI
 
