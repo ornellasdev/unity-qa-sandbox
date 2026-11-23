@@ -14,7 +14,7 @@ This report documents **tester-reported regression results** following the damag
 | Unity version | Unity 6.6 (6000.6.10f1) — previously confirmed |
 | Test method | Manual gameplay regression + local Unity Test Runner Edit Mode |
 | Result source | Tester-reported execution results in conversation |
-| Screenshot/log evidence for RUN-003 | Pending |
+| Screenshot/log evidence for RUN-003 | [RUN-003.png](../Evidence/RUN-003.png) uploaded; image content not independently inspected |
 | Working tree check (subsequent snapshot) | `git status --short` showed only `?? unity-qa-sandbox/` (untracked nested folder), with no tracked-file modifications listed; exact state at test time and active Unity project path not independently verified |
 
 ## Executed checks
@@ -37,7 +37,8 @@ This report documents **tester-reported regression results** following the damag
 
 ## Remaining evidence/tasks
 
-- [ ] Attach a screenshot of the RUN-003 Test Runner results
+- [x] Confirm screenshot file exists at `Evidence/RUN-003.png`
+- [ ] Visually confirm the uploaded screenshot depicts the RUN-003 Test Runner results
 - [ ] Capture a Console/gameplay recording for both respawn cases
 - [x] Review subsequent `git status --short`: no tracked changes; untracked nested `unity-qa-sandbox/` present
 - [ ] Confirm Unity Editor project path and whether the nested folder contains a second project
