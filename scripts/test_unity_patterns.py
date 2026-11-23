@@ -43,5 +43,77 @@ class UnityPatternTests(unittest.TestCase):
             "void Update() { if (true) { GetComponent<Foo>(); } }"))
 
 
+    def test_primitive_cube_builtin_components_are_guaranteed(self):
+        source = (
+            "public static void Build() {"
+            "GameObject checkpoint = GameObject.CreatePrimitive(PrimitiveType.Cube);"
+            "checkpoint.GetComponent<BoxCollider>().isTrigger = true;"
+            "checkpoint.GetComponent<Renderer>().sharedMaterial = material;"
+            "}"
+        )
+        self.assertNotIn("UNITY002", self.codes(source))
+
+    def test_prior_nunit_assertion_suppresses_same_component_access(self):
+        source = (
+            "public IEnumerator Check() {"
+            "Assert.NotNull(player.GetComponent<PlayerHealth>(), \"Required\");"
+            "var value = player.GetComponent<PlayerHealth>().maxHealth;"
+            "}"
+        )
+        self.assertNotIn("UNITY002", self.codes(source))
+
+    def test_different_asserted_component_does_not_suppress(self):
+        source = (
+            "public void Check() {"
+            "Assert.NotNull(player.GetComponent<PlayerMovement>());"
+            "var value = player.GetComponent<PlayerHealth>().maxHealth;"
+            "}"
+        )
+        self.assertIn("UNITY002", self.codes(source))
+
+    def test_assertion_after_access_does_not_suppress(self):
+        source = (
+            "public void Check() {"
+            "var value = player.GetComponent<PlayerHealth>().maxHealth;"
+            "Assert.NotNull(player.GetComponent<PlayerHealth>());"
+            "}"
+        )
+        self.assertIn("UNITY002", self.codes(source))
+
+    def test_assertion_in_previous_method_does_not_suppress(self):
+        source = (
+            "public void First() { Assert.NotNull(player.GetComponent<PlayerHealth>()); }"
+            "public void Second() { var value = player.GetComponent<PlayerHealth>().maxHealth; }"
+        )
+        self.assertIn("UNITY002", self.codes(source))
+
+    def test_receiver_reassignment_keeps_warning(self):
+        source = (
+            "public void Check() {"
+            "Assert.NotNull(player.GetComponent<PlayerHealth>());"
+            "player = other;"
+            "var value = player.GetComponent<PlayerHealth>().maxHealth;"
+            "}"
+        )
+        self.assertIn("UNITY002", self.codes(source))
+
+    def test_primitive_other_component_still_warns(self):
+        source = (
+            "public static void Build() {"
+            "var checkpoint = GameObject.CreatePrimitive(PrimitiveType.Cube);"
+            "checkpoint.GetComponent<PlayerHealth>().CurrentHealth.ToString();"
+            "}"
+        )
+        self.assertIn("UNITY002", self.codes(source))
+
+    def test_primitive_created_in_other_method_still_warns(self):
+        source = (
+            "public static void Build() { var c = GameObject.CreatePrimitive(PrimitiveType.Cube); }"
+            "public static void Use() { c.GetComponent<BoxCollider>().isTrigger = true; }"
+        )
+        self.assertIn("UNITY002", self.codes(source))
+
+
+
 if __name__ == "__main__":
     unittest.main()
