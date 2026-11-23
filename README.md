@@ -94,7 +94,7 @@ Evidence/
 
 **C# source analysis:** [C# Static Analysis](.github/workflows/csharp-static-analysis.yml) parses Unity C# scripts with Tree-sitter and detects syntax errors without a Unity license. Trailing whitespace and tabs are advisory warnings. **The first successful C# static analysis run and a subsequent green run after the Node.js 24 action upgrade were reported by the repository owner.** See [analysis guide](Docs/CSHARP_STATIC_ANALYSIS.md). This is not Roslyn analysis or Unity compilation.
 
-**Unity-specific code-quality checks:** [Unity code quality guide](Docs/UNITY_CODE_QUALITY.md) documents five advisory checks for legacy object search, unchecked component member access, and frequent lookups in frame callbacks. Eight standard-library regression tests protect the checker. These checks are integrated into C# Static Analysis; the expanded workflow **passed on GitHub Actions** (owner screenshot: 17s, five advisory UNITY002 warnings).
+**Unity-specific code-quality checks:** [Unity code quality guide](Docs/UNITY_CODE_QUALITY.md) documents five advisory checks for legacy object search, unchecked component member access, and frequent lookups in frame callbacks. Sixteen standard-library regression tests protect the checker. After refining UNITY002, the repository owner reported **a green GitHub Actions run with no warnings**. The exact run URL has not been recorded.
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
@@ -129,7 +129,7 @@ Evidence/
 - [x] Review five UNITY002 annotations: four in the scene builder, one in full-scene test; no confirmed bugs
 - [x] Refine UNITY002 heuristics for guaranteed primitive components and preceding NUnit null assertions
 - [x] Add eight regression tests (16 analyzer tests total)
-- [ ] Verify expanded analysis still passes and that the original five UNITY002 warnings were suppressed
+- [x] Confirm refined C# static analysis passed with no warnings (owner-reported; run URL not yet recorded)
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
