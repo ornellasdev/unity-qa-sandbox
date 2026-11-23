@@ -172,7 +172,7 @@ def guaranteed_component(clean: str, match: re.Match[str]) -> bool:
     # Do not suppress if the receiver was subsequently reassigned.
     assertions = list(re.finditer(
         rf"\bAssert\s*\.\s*NotNull\s*\(\s*{name}\s*\.\s*"
-        rf"GetComponent\s*<\s*{typ}\s*>\s*\(\s*\)\s*\)",
+        rf"GetComponent\s*<\s*{typ}\s*>\s*\(\s*\)\s*(?:,[^;)]*)?\)",
         prefix,
     ))
     for assertion in reversed(assertions):
