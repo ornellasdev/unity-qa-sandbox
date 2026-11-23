@@ -127,7 +127,9 @@ Evidence/
 - [x] Add Unity-specific C# quality heuristics and regression tests ([guide](Docs/UNITY_CODE_QUALITY.md))
 - [x] Confirm expanded C# Static Analysis workflow passed (owner screenshot: 17s)
 - [x] Review five UNITY002 annotations: four in the scene builder, one in full-scene test; no confirmed bugs
-- [ ] Refine UNITY002 heuristics to recognize guaranteed primitive components and prior assertions
+- [x] Refine UNITY002 heuristics for guaranteed primitive components and preceding NUnit null assertions
+- [x] Add eight regression tests (16 analyzer tests total)
+- [ ] Verify expanded analysis still passes and that the original five UNITY002 warnings were suppressed
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
