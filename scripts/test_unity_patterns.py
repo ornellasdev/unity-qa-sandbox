@@ -123,10 +123,10 @@ class UnityPatternTests(unittest.TestCase):
 
 class UnityMaskAndCommandTests(unittest.TestCase):
     def test_masked_source_keeps_offsets_and_line_breaks(self):
-        source = 'var name = "GetComponent<Foo>().Run()";\\n// GetComponent<Foo>().Run()'
+        source = 'var name = "GetComponent<Foo>().Run()";\n// GetComponent<Foo>().Run()'
         masked = masked_source(source)
         self.assertEqual(len(source), len(masked))
-        self.assertEqual(source.count("\\n"), masked.count("\\n"))
+        self.assertEqual(source.count("\n"), masked.count("\n"))
         self.assertEqual([], analyze(source))
 
     def test_block_comment_and_char_literals_are_ignored(self):
@@ -151,7 +151,7 @@ class UnityMaskAndCommandTests(unittest.TestCase):
         self.assertEqual([], analyze('var s = @"FindObjectOfType<Foo>()'))
 
     def test_raw_multiline_string_is_ignored(self):
-        source = 'var s = """\\nGetComponent<Foo>().Run()\\n""";'
+        source = 'var s = """\nGetComponent<Foo>().Run()\n""";'
         self.assertNotIn("UNITY002", [item[0] for item in analyze(source)])
 
     def test_interpolated_string_is_ignored_conservatively(self):
@@ -212,7 +212,7 @@ class UnityMaskAndCommandTests(unittest.TestCase):
         self.assertIn("No C# files found", output)
 
     def test_cli_fails_on_invalid_utf8(self):
-        status, output = self._run_main(raw=b"\\xff")
+        status, output = self._run_main(raw=b"\xff")
         self.assertEqual(1, status)
         self.assertIn("Cannot read source", output)
 
