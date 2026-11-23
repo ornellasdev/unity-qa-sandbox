@@ -131,6 +131,10 @@ scripts/
   unity-tests.yml
 ```
 
+## QA execution traceability
+
+To capture precise **test-time** Git, Unity Editor and environment metadata for future local runs, use [the traceability guide](Docs/TEST_TRACEABILITY.md) and [snapshot script](scripts/capture_qa_environment.py). Generate **before and after** records, capture Test Runner evidence, and document any dirty working tree. Earlier runs retain their historical limitations; a current commit cannot be assumed to be the tested revision.
+
 ## Roadmap
 
 **Delivered**
@@ -146,6 +150,8 @@ scripts/
 - [ ] Capture additional RUN-002 manual video evidence for collision, double-jump prevention, and separately identified respawn paths.
 - [x] Publish supplemental RUN-003 Console evidence ([RUN-003.png](Evidence/RUN-003.png)); damage, health reset, and respawn shown.
 - [ ] Capture distinct RUN-003 spawn-destination evidence and record full test-time environment/commit metadata on future Unity executions.
+- [x] Publish a before/after QA environment snapshot script and traceability checklist ([guide](Docs/TEST_TRACEABILITY.md)).
+- [ ] Capture before/after environment snapshots during the next actual Unity test run.
 - [ ] Review the locally modified `ProjectSettings/ProjectSettings.asset` before deciding whether to commit or restore it.
 - [ ] Extend negative-path coverage and maintain defect/regression records.
 - [ ] Enable Unity hosted Edit Mode/Play Mode CI **only when an authorized Unity CI licensing setup exists**, then archive actual NUnit XML results.
