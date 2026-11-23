@@ -54,6 +54,7 @@ The **29 Unity tests** and the **35 Python analyzer tests** are separate test su
 | **RUN-005** | Physics-trigger test expansion | [Report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) | [Screenshot](Evidence/RUN-005.png) |
 | **RUN-006** | Full-scene integration and retest | [Report](Docs/TEST_EXECUTION_REPORT_RUN-006.md) | [Screenshot](Evidence/RUN-006.png) |
 | **RUN-007** | Negative cases and complete regression | [Report](Docs/TEST_EXECUTION_REPORT_RUN-007.md) | [Evidence 1](Evidence/RUN-007(1).png) · [Evidence 2](Evidence/RUN-007(2).png) |
+| **RUN-008** | Repeat Unity regression with before/after Git traceability | [Report](Docs/TEST_EXECUTION_REPORT_RUN-008.md) | [Edit Mode](Evidence/RUN-008(1).png) · [Play Mode](Evidence/RUN-008(2).png) · [Before](Evidence/Traceability/RUN-008-before.md) · [After](Evidence/Traceability/RUN-008-after.md) |
 
 **Evidence limitations:** RUN-007 screenshots establish the displayed **22/22 Edit Mode** and **7/7 Play Mode** results, but do not show the exact test-time Git commit or a clean working tree. The RUN-002 video includes the damage/health restoration sequence; formal movement, collision, double-jump, and distinct initial/checkpoint respawn observations remain tester-reported unless separately recorded.
 
@@ -141,7 +142,7 @@ To capture precise **test-time** Git, Unity Editor and environment metadata for 
 - [x] Playable 3D Unity prototype and committed scene.
 - [x] Health, checkpoint, damage and respawn components.
 - [x] **RUN-007: 29/29 locally executed Unity tests passed**, including 13 new negative-path/boundary tests.
-- [x] **RUN-008: 29/29 Unity Test Runner tests passed again locally** (22 Edit Mode + 7 Play Mode, screenshots reviewed; [report](Docs/TEST_EXECUTION_REPORT_RUN-008.md)); before-snapshot captured on commit `4b1b839`, but final traceability evidence is still pending.
+- [x] **RUN-008: 29/29 Unity Test Runner tests passed again locally** (22 Edit Mode + 7 Play Mode; [report](Docs/TEST_EXECUTION_REPORT_RUN-008.md)). Both screenshots and both traceability snapshots are committed; HEAD `4b1b8396` recorded in the before/after snapshots with a **DIRTY** worktree.
 - [x] Evidence-backed manual QA reports, gameplay video, and screenshot collection.
 - [x] License-free repository and C# analysis workflows.
 - [x] **35 Python analyzer tests, 98.1% coverage**, automated QA artifacts and ≥85% coverage threshold.
@@ -152,8 +153,8 @@ To capture precise **test-time** Git, Unity Editor and environment metadata for 
 - [x] Publish supplemental RUN-003 Console evidence ([RUN-003.png](Evidence/RUN-003.png)); damage, health reset, and respawn shown.
 - [ ] Capture distinct RUN-003 spawn-destination evidence and record full test-time environment/commit metadata on future Unity executions.
 - [x] Publish a before/after QA environment snapshot script and traceability checklist ([guide](Docs/TEST_TRACEABILITY.md)).
-- [x] Capture RUN-008 before-test environment metadata with the new script (working tree DIRTY).
-- [ ] Rerun RUN-008 after-test snapshot following the actual tests; upload both snapshots and two Test Runner screenshots.
+- [x] Verify RUN-008 before/after snapshots, screenshots, timestamp, Git HEAD, Unity project version and dirty working-tree status.
+- [ ] Review local `ProjectSettings/ProjectSettings.asset` diff fully; snapshots record modified path but not full content.
 - [ ] Review the locally modified `ProjectSettings/ProjectSettings.asset` before deciding whether to commit or restore it.
 - [ ] Extend negative-path coverage and maintain defect/regression records.
 - [ ] Enable Unity hosted Edit Mode/Play Mode CI **only when an authorized Unity CI licensing setup exists**, then archive actual NUnit XML results.
