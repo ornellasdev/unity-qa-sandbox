@@ -6,11 +6,11 @@ By [Yuri Ornellas](https://github.com/ornellasdev)
 [![Unity](https://img.shields.io/badge/Unity-6.6-222?logo=unity)](https://unity.com/)
 ![C#](https://img.shields.io/badge/Code-C%23-512BD4)
 ![QA](https://img.shields.io/badge/QA-Manual%20%2B%20Automated-blue)
-![CI](https://img.shields.io/badge/CI-Not%20configured-lightgrey)
+![CI](https://img.shields.io/badge/CI-Workflow%20configured%20%7C%20not%20validated-yellow)
 
 This repository demonstrates an **original, playable graybox prototype** alongside manual test cases, C# NUnit tests, physics-trigger integration checks, a serialized-scene test, regression investigations, and documented local test runs.
 
-> **Current result:** **16 distinct automated test methods passed locally** — 9 Edit Mode + 7 Play Mode. These results were observed in Unity Test Runner; **CI is not configured**.
+> **Current result:** **16 distinct automated test methods passed locally** — 9 Edit Mode + 7 Play Mode. These results were observed in Unity Test Runner; **CI workflow is published but has not completed a verified run**.
 
 ## 🎯 Gameplay prototype
 
@@ -43,7 +43,7 @@ This repository demonstrates an **original, playable graybox prototype** alongsi
 | RUN-005 | 6 Play Mode tests, including physics triggers | [Report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) | [RUN-005.png](Evidence/RUN-005.png) |
 | RUN-006 | Full-scene test + failure investigation + retest | [Report](Docs/TEST_EXECUTION_REPORT_RUN-006.md) | [RUN-006.png](Evidence/RUN-006.png) |
 
-All results are from **local tester executions**, not GitHub Actions. Some earlier runs lack a precisely recorded clean checkout or full environment metadata.
+All passing test results listed above are from **local tester executions**, not GitHub Actions. The CI workflow is present but awaits license setup and its first verified run. Some earlier runs lack a precisely recorded clean checkout or full environment metadata.
 
 ## 🛠️ Tech stack
 
@@ -86,6 +86,10 @@ Evidence/
   RUN-006.png
 ```
 
+## 🤖 Continuous integration
+
+The [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is now configured for **Edit Mode** and **Play Mode**, using GameCI on an Ubuntu runner. It is **not yet verified as passing in GitHub Actions**. To run it, configure Unity licensing secrets and follow the [CI setup guide](Docs/CI_SETUP.md). Automatic runs remain gated until `UNITY_CI_ENABLED=true` is set.
+
 ## 🗺️ Roadmap
 
 ### Completed
@@ -102,8 +106,11 @@ Evidence/
 - [ ] Add RUN-002 manual gameplay evidence and RUN-003 regression evidence
 - [ ] Record reproducible build/commit and clean-worktree details for future executions
 - [ ] Evaluate and reconcile Unity `ProjectSettings` differences across environments
-- [ ] Add a GitHub Actions workflow for Unity **Edit Mode + Play Mode** testing, including runner/license configuration and private credentials
-- [ ] Export/publish machine-readable test results and CI artifacts after the workflow is working
+- [x] Publish gated GitHub Actions workflow for Unity **Edit Mode + Play Mode** ([workflow](.github/workflows/unity-tests.yml), [setup instructions](Docs/CI_SETUP.md))
+- [ ] Configure required Unity license secrets privately in GitHub Actions
+- [ ] Verify a successful manual CI run (9 Edit Mode + 7 Play Mode)
+- [ ] Enable automatic push checks with the `UNITY_CI_ENABLED=true` repository variable
+- [ ] Collect and link CI XML/log artifacts after the workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
 ## 📫 Contact
