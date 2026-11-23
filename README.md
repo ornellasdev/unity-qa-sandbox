@@ -100,6 +100,8 @@ Evidence/
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
+**Negative-path regression expansion (awaiting execution):** Added **13 new Unity Edit Mode NUnit cases** covering invalid health inputs, saturating heals, repeated damage, and checkpoint boundaries, plus an overflow-safe heal fix. The **22 Edit Mode + 7 Play Mode tests are now defined, not yet all re-executed**. See [RUN-007](Docs/TEST_EXECUTION_REPORT_RUN-007.md).
+
 ## 🗺️ Roadmap
 
 ### Completed
@@ -140,7 +142,9 @@ Evidence/
 - [x] Confirm [run 45102176871](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102176871): 35/35 regression tests PASS, Python analyzer **98% line coverage (156/159)**, 13 C# scripts scanned and 0 Unity findings
 - [x] Upgrade `actions/upload-artifact` to v6 (Node.js 24), verified warning-free in [run 45102487210](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102487210): **35/35**, **98.1%** (156/159 lines), **0 C# syntax/style findings**
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
-- [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
+- [x] Implement 13 additional NUnit negative-path/boundary tests and overflow-safe heal fix ([RUN-007](Docs/TEST_EXECUTION_REPORT_RUN-007.md))
+- [ ] Execute and document RUN-007 locally: 22 Edit Mode + 7 Play Mode tests; capture screenshot evidence and any failures
+- [ ] Track any bugs discovered in RUN-007 and verify regressions
 
 ## 📫 Contact
 
