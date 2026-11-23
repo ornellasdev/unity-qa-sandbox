@@ -96,7 +96,7 @@ Evidence/
 
 **Unity-specific code-quality checks:** [Unity code quality guide](Docs/UNITY_CODE_QUALITY.md) documents five advisory checks for legacy object search, unchecked component member access, and frequent lookups in frame callbacks. Sixteen standard-library regression tests protect the checker. After refining UNITY002, the repository owner reported **a green GitHub Actions run with no warnings**. The exact run URL has not been recorded.
 
-**Static QA evidence (new):** The [C# Static Analysis workflow](.github/workflows/csharp-static-analysis.yml) now generates a per-run Markdown report, diagnostic logs, and **Python analyzer line coverage** in a downloadable GitHub Actions artifact. This is **not C# or gameplay coverage**. See the [reports guide](Docs/STATIC_QA_REPORTS.md). The repository owner reports a successful, warning-free run and provided a screenshot confirming the downloaded `static-qa-evidence` artifact contains all five expected files. Uploaded report and coverage XML confirm **76.1% Python analyzer line coverage (121/159 lines), 16/16 regression tests, 13 C# files scanned and zero findings** in [run 45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954).
+**Static QA evidence:** The [C# Static Analysis workflow](.github/workflows/csharp-static-analysis.yml) now generates a per-run Markdown report, diagnostic logs, and **Python analyzer line coverage** in a downloadable GitHub Actions artifact. This is **not C# or gameplay coverage**. See the [reports guide](Docs/STATIC_QA_REPORTS.md). The repository owner reports a successful, warning-free run and provided a screenshot confirming the downloaded `static-qa-evidence` artifact contains all five expected files. The baseline [run 45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954) measured **76.1% Python analyzer coverage**. The verified [run 45102176871](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102176871) improved to **98% (156/159 Python lines), 35/35 regression tests passing, 13 C# files scanned, and zero static findings**. The GitHub Actions log confirms this; it does not measure Unity gameplay coverage.
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
@@ -137,7 +137,8 @@ Evidence/
 - [x] Verify a downloadable `static-qa-evidence` artifact contains the five expected files (owner screenshot)
 - [x] Record verified Python analyzer coverage from uploaded CI artifact: **76.1% (121/159 lines)**, 16/16 tests passing, 0 findings ([run](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954))
 - [x] Add 19 new Python analyzer regression tests (35 total) and configure an 85% Python line-coverage threshold
-- [ ] Confirm post-change CI and actual Python analyzer coverage >=85% (baseline: 76.1%)
+- [x] Confirm [run 45102176871](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102176871): 35/35 regression tests PASS, Python analyzer **98% line coverage (156/159)**, 13 C# scripts scanned and 0 Unity findings
+- [x] Upgrade `actions/upload-artifact` to v6 (Node.js 24); verify its warning is gone in the next run
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
