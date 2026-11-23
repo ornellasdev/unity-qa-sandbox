@@ -13,6 +13,8 @@ on:
     paths:
       - 'Assets/**/*.cs'
       - 'scripts/check_csharp.py'
+      - 'scripts/check_unity_patterns.py'
+      - 'scripts/test_unity_patterns.py'
       - '.github/workflows/csharp-static-analysis.yml'
   workflow_dispatch:
 
