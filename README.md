@@ -96,7 +96,7 @@ Evidence/
 
 **Unity-specific code-quality checks:** [Unity code quality guide](Docs/UNITY_CODE_QUALITY.md) documents five advisory checks for legacy object search, unchecked component member access, and frequent lookups in frame callbacks. Sixteen standard-library regression tests protect the checker. After refining UNITY002, the repository owner reported **a green GitHub Actions run with no warnings**. The exact run URL has not been recorded.
 
-**Static QA evidence (new):** The [C# Static Analysis workflow](.github/workflows/csharp-static-analysis.yml) now generates a per-run Markdown report, diagnostic logs, and **Python analyzer line coverage** in a downloadable GitHub Actions artifact. This is **not C# or gameplay coverage**. See the [reports guide](Docs/STATIC_QA_REPORTS.md). The first run with this new reporting setup has not yet been confirmed.
+**Static QA evidence (new):** The [C# Static Analysis workflow](.github/workflows/csharp-static-analysis.yml) now generates a per-run Markdown report, diagnostic logs, and **Python analyzer line coverage** in a downloadable GitHub Actions artifact. This is **not C# or gameplay coverage**. See the [reports guide](Docs/STATIC_QA_REPORTS.md). The repository owner reports the updated workflow completed successfully without warnings; artifact contents and the coverage percentage are still awaiting verification.
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
@@ -133,7 +133,8 @@ Evidence/
 - [x] Add eight regression tests (16 analyzer tests total)
 - [x] Confirm refined C# static analysis passed with no warnings (owner-reported; run URL not yet recorded)
 - [x] Publish static CI QA reports, diagnostic artifacts and Python analyzer coverage ([guide](Docs/STATIC_QA_REPORTS.md))
-- [ ] Verify the first GitHub Actions run generates a downloadable static QA artifact
+- [x] Confirm the static QA reporting workflow completed successfully without warnings (owner-reported)
+- [ ] Verify the run contains a downloadable `static-qa-evidence` artifact and record its coverage percentage
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
