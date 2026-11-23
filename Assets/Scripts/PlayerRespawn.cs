@@ -16,7 +16,7 @@ namespace UnityQASandbox
 
         public void SetCheckpoint(Vector3 position) => checkpoints.Activate(position);
 
-        
+
 public void Respawn()
 {
     controller.enabled = false;
