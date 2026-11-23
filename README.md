@@ -125,7 +125,7 @@ Evidence/
 - [x] Publish license-free C# syntax/static hygiene workflow ([workflow](.github/workflows/csharp-static-analysis.yml))
 - [x] Confirm successful C# static analysis GitHub Actions run (owner screenshot reviewed previously)
 - [x] Confirm C# analysis and repository validation remained green after Node.js 24 action updates (owner-reported)
-- [ ] Inspect latest post-upgrade logs to confirm no remaining Node.js/whitespace warnings
+- [x] Inspect Node.js 24 post-upgrade static-analysis logs: no deprecation or whitespace warnings in [run 45102487210](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102487210)
 - [x] Add Unity-specific C# quality heuristics and regression tests ([guide](Docs/UNITY_CODE_QUALITY.md))
 - [x] Confirm expanded C# Static Analysis workflow passed (owner screenshot: 17s)
 - [x] Review five UNITY002 annotations: four in the scene builder, one in full-scene test; no confirmed bugs
@@ -138,7 +138,7 @@ Evidence/
 - [x] Record verified Python analyzer coverage from uploaded CI artifact: **76.1% (121/159 lines)**, 16/16 tests passing, 0 findings ([run](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954))
 - [x] Add 19 new Python analyzer regression tests (35 total) and configure an 85% Python line-coverage threshold
 - [x] Confirm [run 45102176871](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102176871): 35/35 regression tests PASS, Python analyzer **98% line coverage (156/159)**, 13 C# scripts scanned and 0 Unity findings
-- [x] Upgrade `actions/upload-artifact` to v6 (Node.js 24); verify its warning is gone in the next run
+- [x] Upgrade `actions/upload-artifact` to v6 (Node.js 24), verified warning-free in [run 45102487210](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102487210): **35/35**, **98.1%** (156/159 lines), **0 C# syntax/style findings**
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
