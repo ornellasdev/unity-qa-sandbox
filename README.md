@@ -10,7 +10,7 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - Health, hazards, checkpoints and respawn
 - **9 NUnit Edit Mode tests** of gameplay models
 - **3 Unity Play Mode component tests** covering damage, death/health restoration, and checkpoint position
-- **3 additional physics-driven Play Mode tests** for trigger-entry damage, lethal respawn, and checkpoint-trigger recovery (**source added; not executed yet**)
+- **3 additional physics-driven Play Mode tests** for trigger-entry damage, lethal respawn, and checkpoint-trigger recovery (**6/6 Play Mode tests passed in RUN-005; screenshot reviewed in chat**)
 - English test plans and execution reports
 
 ## Setup
@@ -27,15 +27,15 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 | Health logic (7 methods) | NUnit Edit Mode | ✅ 7/7 Passed — screenshot reviewed |
 | Checkpoint logic (2 methods) | NUnit Edit Mode | ✅ 2/2 Passed — screenshot reviewed |
 | Gameplay components (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-004 screenshot published |
-| Physics trigger interactions (3 methods) | Unity Play Mode | Not Run — newly authored, RUN-005 pending |
+| Physics trigger interactions (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-005 screenshot reviewed in chat; repository upload pending |
 | WASD movement, jump, collision, checkpoint respawn, airborne double-jump prevention, initial-spawn respawn | Manual | ✅ 6 observed checks passed — tester reported |
 | Full-health restoration at initial spawn and activated checkpoint | Manual | ✅ 2 scenarios passed — tester reported; Console screenshot reviewed in chat |
 
 **Automated Edit Mode result:** 9 passed, 0 failed (100%) in RUN-001. **RUN-002:** Eight gameplay observations passed. **RUN-003 regression (tester-reported against fix `9406fca`):** initial respawn PASS, checkpoint respawn PASS, Edit Mode 9/9 PASS. Evidence and clean working tree confirmation for RUN-003 remain pending.
 
-**Total automated test methods reported passed across Edit Mode and Play Mode: 12 (9 + 3)**. Tests were run locally, not in CI.
+**Total distinct automated test methods reported passed across Edit Mode and Play Mode: 15 (9 + 6)**. Tests were run locally, not in CI.
 
-🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [RUN-003 regression report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) · [RUN-004 Play Mode report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
+🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [RUN-003 regression report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) · [RUN-004 Play Mode report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) · [RUN-005 physics integration report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
 
 > RUN-001 has screenshot evidence of local Unity Test Runner results, not independent CI validation. RUN-002 is based on tester-reported manual observations, with Console screenshot reviewed in chat but not yet uploaded to the repository. Environment: **CachyOS (Linux)** and **Unity 6.6 (6000.6.10f1)**; exact tested commit is not recorded.
 
@@ -49,9 +49,10 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - [ ] Confirm clean working tree and attach new RUN-003 evidence
 - [ ] Upload RUN-002 Console/gameplay evidence to the repository
 - [x] Add and locally run three gameplay-component Play Mode tests, published in `3f602ea`
-- [ ] Upload RUN-004 screenshot to the repository
+- [x] Upload RUN-004 screenshot to the repository
 - [x] Add physics-trigger Play Mode test source (PLAY004–PLAY006)
-- [ ] Run physics-trigger tests and capture results for RUN-005
+- [x] Execute six Play Mode tests: 6/6 PASS (RUN-005 screenshot reviewed in chat)
+- [ ] Upload RUN-005 screenshot to GitHub and record exact tested commit
 - [ ] Add CI for Unity test suites
 
 **Author:** [Yuri Ornellas](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/)
