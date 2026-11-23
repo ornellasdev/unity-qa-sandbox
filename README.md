@@ -9,7 +9,8 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - WASD / arrow-key movement, Space to jump, gravity, collision
 - Health, hazards, checkpoints and respawn
 - **9 NUnit Edit Mode tests** of gameplay models
-- **3 Unity Play Mode tests** covering damage, death/health restoration, and checkpoint position
+- **3 Unity Play Mode component tests** covering damage, death/health restoration, and checkpoint position
+- **3 additional physics-driven Play Mode tests** for trigger-entry damage, lethal respawn, and checkpoint-trigger recovery (**source added; not executed yet**)
 - English test plans and execution reports
 
 ## Setup
@@ -25,7 +26,8 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 |---|---|---|
 | Health logic (7 methods) | NUnit Edit Mode | ✅ 7/7 Passed — screenshot reviewed |
 | Checkpoint logic (2 methods) | NUnit Edit Mode | ✅ 2/2 Passed — screenshot reviewed |
-| Gameplay components (3 methods) | Unity Play Mode | ✅ 3/3 Passed — screenshot reviewed in chat; RUN-004 evidence upload pending |
+| Gameplay components (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-004 screenshot published |
+| Physics trigger interactions (3 methods) | Unity Play Mode | Not Run — newly authored, RUN-005 pending |
 | WASD movement, jump, collision, checkpoint respawn, airborne double-jump prevention, initial-spawn respawn | Manual | ✅ 6 observed checks passed — tester reported |
 | Full-health restoration at initial spawn and activated checkpoint | Manual | ✅ 2 scenarios passed — tester reported; Console screenshot reviewed in chat |
 
@@ -48,6 +50,8 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - [ ] Upload RUN-002 Console/gameplay evidence to the repository
 - [x] Add and locally run three gameplay-component Play Mode tests, published in `3f602ea`
 - [ ] Upload RUN-004 screenshot to the repository
-- [ ] Add physics-trigger Play Mode tests and CI
+- [x] Add physics-trigger Play Mode test source (PLAY004–PLAY006)
+- [ ] Run physics-trigger tests and capture results for RUN-005
+- [ ] Add CI for Unity test suites
 
 **Author:** [Yuri Ornellas](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/)
