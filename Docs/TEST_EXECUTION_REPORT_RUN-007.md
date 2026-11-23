@@ -44,7 +44,7 @@
 - Execution evidence: **two Test Runner screenshot files are now committed to the repository**: [RUN-007(1).png](../Evidence/RUN-007(1).png) and [RUN-007(2).png](../Evidence/RUN-007(2).png). The tester-provided EditMode and PlayMode screenshots show the passing results listed above; image filenames alone do not establish which test mode each file depicts.
 - Target environment: Unity Editor 6000.6.10f1 / CachyOS.
 - Actual editor build number in screenshot: **not displayed**; cannot independently verify version from screenshot.
-- Exact local commit / worktree state during execution: **not recorded**.
+- Exact local commit / worktree state **during test execution**: **not recorded**. In a subsequent tester screenshot, `git rev-parse HEAD` returned `5d26c30d4f681349c77f74d5ebc07e8b86d973ae`, `git status -sb` showed `## main...origin/main` and `M ProjectSettings/ProjectSettings.asset`. This confirms the **post-execution local snapshot was not clean**, but does not establish the commit or working-tree state at the moment of testing. The local ProjectSettings change has not been inspected or discarded.
 - XML export: **not supplied**.
 - Defects observed in the displayed results: **none**; all displayed tests passed.
 - Test context: **local Unity Editor execution**, not licensed Unity GitHub Actions CI.
