@@ -28,7 +28,7 @@ The repository owner reported a successful, warning-free run of the updated C# s
 
 ## Python analyzer coverage target
 
-Baseline evidence from run [45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954) is **76.1%** (121 of 159 executable lines). Added 19 regression tests (35 total) exercising C# literal masking, incomplete input, the `typeof` pattern and analyzer CLI, including strict mode and unreadable UTF-8. The workflow now runs `coverage report --include='*/check_unity_patterns.py' --fail-under=85` after the evidence upload. **The updated run and actual new percentage still need verification**; the new threshold is a target, not a claimed measurement. This coverage is Python-only, not Unity C# gameplay coverage.
+Baseline evidence from run [45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954) is **76.1%** (121 of 159 executable lines). Added 19 regression tests (35 total) exercising C# literal masking, incomplete input, the `typeof` pattern and analyzer CLI, including strict mode and unreadable UTF-8. The workflow now runs `coverage report --include='*/check_unity_patterns.py' --fail-under=85` after the evidence upload. **Verified:** [run 45102176871](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102176871) completed successfully with **35/35 tests PASS** and **98% Python analyzer coverage (156 of 159 lines)** as shown in the GitHub Actions job log. The 85% minimum passed. The run contained 0 C# syntax errors, 0 style warnings, and 0 Unity-specific findings. Its sole GitHub annotation was a Node.js 20 deprecation warning from `actions/upload-artifact@v4`; the workflow has since been upgraded to v6, awaiting another run. This coverage is Python-only, not Unity C# gameplay coverage. This coverage is Python-only, not Unity C# gameplay coverage.
 
 ## Current state
 
@@ -39,5 +39,7 @@ Baseline evidence from run [45101652954](https://github.com/ornellasdev/unity-qa
 - [x] Record verified run [45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954) and actual **76.1% Python analyzer line coverage** (121/159 lines)
 - [x] Add 19 regression tests to broaden analyzer Python coverage
 - [x] Configure a minimum of 85% Python analyzer line coverage in CI
-- [ ] Verify 35/35 tests pass and actual coverage meets the threshold on GitHub Actions
+- [x] Verify 35/35 tests PASS and 98% Python coverage on [run 45102176871](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102176871)
+- [x] Upgrade artifact upload action to Node.js 24-compatible v6
+- [ ] Confirm the Node.js deprecation warning disappears on a post-upgrade run
 - [ ] Add Unity C# and gameplay coverage only after licensed Unity tests can run
