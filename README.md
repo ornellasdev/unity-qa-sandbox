@@ -11,7 +11,7 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - **9 NUnit Edit Mode tests** of gameplay models
 - **3 Unity Play Mode component tests** covering damage, death/health restoration, and checkpoint position
 - **3 physics-driven Play Mode tests** for trigger-entry damage, lethal respawn, and checkpoint-trigger recovery (**6/6 Play Mode tests passed in RUN-005; screenshot reviewed in chat**)
-- **PLAY007 full-scene integration check** loads the serialized QASandbox scene and validates required objects and components (**Not Run**)
+- **PLAY007 full-scene integration check** loads the serialized QASandbox scene and validates required objects and components (**PASS in RUN-006 retest**)
 - English test plans and execution reports
 
 ## Setup
@@ -30,15 +30,15 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 | Gameplay components (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-004 screenshot published |
 | Physics trigger interactions (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-005 screenshot reviewed in chat |
 | Full serialized QASandbox scene (PLAY007) | Unity Play Mode / Editor | ✅ PASS in initial RUN-006 |
-| Full seven-test regression suite | Unity Play Mode | ⚠️ RUN-006 initial attempt: 4 passed, 3 failed; rerun pending after isolation change |
+| Full seven-test regression suite | Unity Play Mode | ✅ RUN-006 retest: 7 passed, 0 failed (initial attempt: 4 passed, 3 failed) |
 | WASD movement, jump, collision, checkpoint respawn, airborne double-jump prevention, initial-spawn respawn | Manual | ✅ 6 observed checks passed — tester reported |
 | Full-health restoration at initial spawn and activated checkpoint | Manual | ✅ 2 scenarios passed — tester reported; Console screenshot reviewed in chat |
 
 **Automated Edit Mode result:** 9 passed, 0 failed (100%) in RUN-001. **RUN-002:** Eight gameplay observations passed. **RUN-003 regression (tester-reported against fix `9406fca`):** initial respawn PASS, checkpoint respawn PASS, Edit Mode 9/9 PASS. Evidence and clean working tree confirmation for RUN-003 remain pending.
 
-**Total distinct automated test methods reported passed across Edit Mode and Play Mode: 15 (9 + 6)**. Tests were run locally, not in CI.
+**Total distinct automated test methods reported passed across Edit Mode and Play Mode: 16 (9 + 7)**. Tests were run locally, not in CI.
 
-🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [RUN-003 regression report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) · [RUN-004 Play Mode report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) · [RUN-005 physics integration report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) · [RUN-006 initial failed regression](Docs/TEST_EXECUTION_REPORT_RUN-006.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
+🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [RUN-003 regression report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) · [RUN-004 Play Mode report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) · [RUN-005 physics integration report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) · [RUN-006 failure and successful retest](Docs/TEST_EXECUTION_REPORT_RUN-006.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
 
 > RUN-001 has screenshot evidence of local Unity Test Runner results, not independent CI validation. RUN-002 is based on tester-reported manual observations, with Console screenshot reviewed in chat but not yet uploaded to the repository. Environment: **CachyOS (Linux)** and **Unity 6.6 (6000.6.10f1)**; exact tested commit is not recorded.
 
@@ -59,7 +59,8 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - [x] Add PLAY007 serialized scene validation test source
 - [x] Execute PLAY007: passed in initial RUN-006
 - [x] Record initial RUN-006 failure: 4 passed, 3 failed
-- [ ] Rerun all seven Play Mode tests after scene-isolation change and attach evidence
+- [x] Rerun all seven Play Mode tests after scene-isolation change: 7/7 PASS
+- [ ] Upload RUN-006 retest screenshot and confirm tested working tree
 - [ ] Add CI for Unity test suites
 
 **Author:** [Yuri Ornellas](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/)
