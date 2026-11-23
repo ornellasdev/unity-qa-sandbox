@@ -49,7 +49,7 @@ The **29 Unity tests** and the **35 Python analyzer tests** are separate test su
 |---|---|---|---|
 | **RUN-001** | Baseline Edit Mode tests | [Report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) | [Screenshot](Evidence/RUN-001.png) |
 | **RUN-002** | Manual gameplay: movement, jump, collision, damage, respawn | [Report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) | [Gameplay and respawn video](Evidence/RUN-002-Gameplay-Respawn.mp4) — partial visual coverage |
-| **RUN-003** | Regression following damage/respawn fix | [Report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) | Screenshot evidence pending |
+| **RUN-003** | Regression following damage/respawn fix | [Report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) | [Console evidence](Evidence/RUN-003.png) — damage and respawn flow, not both spawn destinations |
 | **RUN-004** | First three Play Mode tests | [Report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) | [Screenshot](Evidence/RUN-004.png) |
 | **RUN-005** | Physics-trigger test expansion | [Report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) | [Screenshot](Evidence/RUN-005.png) |
 | **RUN-006** | Full-scene integration and retest | [Report](Docs/TEST_EXECUTION_REPORT_RUN-006.md) | [Screenshot](Evidence/RUN-006.png) |
@@ -144,7 +144,8 @@ scripts/
 
 **Next**
 - [ ] Capture additional RUN-002 manual video evidence for collision, double-jump prevention, and separately identified respawn paths.
-- [ ] Add RUN-003 missing screenshots and record full test-time environment/commit metadata on future Unity executions.
+- [x] Publish supplemental RUN-003 Console evidence ([RUN-003.png](Evidence/RUN-003.png)); damage, health reset, and respawn shown.
+- [ ] Capture distinct RUN-003 spawn-destination evidence and record full test-time environment/commit metadata on future Unity executions.
 - [ ] Review the locally modified `ProjectSettings/ProjectSettings.asset` before deciding whether to commit or restore it.
 - [ ] Extend negative-path coverage and maintain defect/regression records.
 - [ ] Enable Unity hosted Edit Mode/Play Mode CI **only when an authorized Unity CI licensing setup exists**, then archive actual NUnit XML results.
