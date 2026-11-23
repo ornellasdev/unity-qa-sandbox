@@ -24,7 +24,7 @@ The reports are per-run artifacts; they are **not** a permanent public historica
 
 ## Latest confirmation
 
-The repository owner reported a successful, warning-free run of the updated C# static analysis workflow. The repository owner shared a screenshot of the extracted `static-qa-evidence` ZIP showing `QA_SUMMARY.md`, `coverage.xml`, `analyzer-tests.log`, `csharp-syntax.log` and `unity-patterns.log`. The file contents and precise Python coverage percentage have not yet been examined.
+The repository owner reported a successful, warning-free run of the updated C# static analysis workflow. The repository owner shared a screenshot of the extracted `static-qa-evidence` ZIP showing `QA_SUMMARY.md`, `coverage.xml`, `analyzer-tests.log`, `csharp-syntax.log` and `unity-patterns.log`. The owner subsequently supplied all five original artifact files. Verified report for [GitHub Actions run 45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954), revision `8868238d8de8d114b702c75fd36f1a7a83c5b00e`: **16/16 Python analyzer regression tests PASS**, **76.1% line coverage (121/159 executable lines)** for `scripts/check_unity_patterns.py`, **13 C# files scanned**, **0 syntax errors**, **0 style warnings**, and **0 Unity heuristic findings**. These are point-in-time static QA metrics, **not** Unity or C# gameplay coverage.
 
 ## Current state
 
@@ -32,5 +32,5 @@ The repository owner reported a successful, warning-free run of the updated C# s
 - [x] Add Python analyzer line-coverage export
 - [x] Confirm a successful run of the updated workflow (owner-reported)
 - [x] Verify the `static-qa-evidence` artifact exists and contains the expected five files (owner screenshot)
-- [ ] Record a verified example run URL and its actual coverage percentage
+- [x] Record verified run [45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954) and actual **76.1% Python analyzer line coverage** (121/159 lines)
 - [ ] Add Unity C# and gameplay coverage only after licensed Unity tests can run
