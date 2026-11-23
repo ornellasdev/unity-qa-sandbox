@@ -6,7 +6,7 @@ By [Yuri Ornellas](https://github.com/ornellasdev)
 [![Unity](https://img.shields.io/badge/Unity-6.6-222?logo=unity)](https://unity.com/)
 ![C#](https://img.shields.io/badge/Code-C%23-512BD4)
 ![QA](https://img.shields.io/badge/QA-Manual%20%2B%20Automated-blue)
-![Static CI](https://img.shields.io/badge/Static%20CI-Configured%20%7C%20run%20pending-yellow)
+[![Repository Validation](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/repository-validation.yml/badge.svg)](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/repository-validation.yml)
 ![Unity CI](https://img.shields.io/badge/Unity%20CI-License%20pending-lightgrey)
 
 This repository demonstrates an **original, playable graybox prototype** alongside manual test cases, C# NUnit tests, physics-trigger integration checks, a serialized-scene test, regression investigations, and documented local test runs.
@@ -89,7 +89,7 @@ Evidence/
 
 ## 🤖 Continuous integration
 
-**License-free repository checks:** [Repository Validation](.github/workflows/repository-validation.yml) runs automatically on relevant pushes and pull requests. It checks required files, Unity `.meta` consistency, JSON and assembly definitions, project version, and committed generated folders. It requires **no Unity Editor or license**. The workflow has been published, but its first successful Actions run has **not yet been confirmed**. See the [static CI guide](Docs/REPOSITORY_CI.md).
+**License-free repository checks:** [Repository Validation](.github/workflows/repository-validation.yml) runs automatically on relevant pushes and pull requests. It checks required files, Unity `.meta` consistency, JSON and assembly definitions, project version, and committed generated folders. It requires **no Unity Editor or license**. The first successful GitHub Actions run has been **confirmed by the repository owner's workflow screenshot** (job: `Unity repository static checks`, 7 seconds). See the [static CI guide](Docs/REPOSITORY_CI.md).
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
@@ -107,7 +107,7 @@ Evidence/
 
 ### Next milestones
 - [x] Publish license-free repository validation on pushes/PRs ([workflow](.github/workflows/repository-validation.yml))
-- [ ] Confirm first repository-validation GitHub Actions run succeeds
+- [x] Confirm first repository-validation GitHub Actions run succeeds (successful job screenshot reviewed)
 - [ ] Add RUN-002 manual gameplay evidence and RUN-003 regression evidence
 - [ ] Record reproducible build/commit and clean-worktree details for future executions
 - [ ] Evaluate and reconcile Unity `ProjectSettings` differences across environments
