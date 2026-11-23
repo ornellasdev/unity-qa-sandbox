@@ -35,6 +35,12 @@ The two original Markdown snapshots were inspected directly in GitHub and are li
 
 A partial `git diff` displayed Apple platform-target configuration differences, including iOS, tvOS and macOS settings. Its full contents and relevance to the Unity tests have not been reviewed; do not discard this local modification merely to obtain a clean status.
 
+## Review of local ProjectSettings diff
+
+The tester supplied the complete `git diff -- ProjectSettings/ProjectSettings.asset` output in a later screenshot. It shows **10 additions and 6 deletions** affecting `targetPixelDensity` (0 -> 30), expansion of `buildNumber` into platform-specific zero values, and iOS/tvOS/visionOS/macOS minimum target version strings (15.0/15.0/1.0/12.0, respectively). No gameplay scripts or NUnit test files were changed in that diff. The settings may affect builds/displays on their respective target platforms; no separate cross-platform build validation is evidenced.
+
+**Disposition:** preserve the local asset and patch backup; if these were not intentional configuration changes, restore only `ProjectSettings/ProjectSettings.asset` to the tracked revision after backing it up. No restoration, follow-up clean worktree, or post-restoration Unity test result has yet been confirmed. RUN-008 remains a PASS on the earlier **DIRTY** working tree; a later restoration does not retroactively change that condition.
+
 ## Evidence
 
 - [RUN-008(1).png — Edit Mode](../Evidence/RUN-008(1).png): 22 passed, 0 failed; duration 0.009s.
@@ -51,7 +57,8 @@ A partial `git diff` displayed Apple platform-target configuration differences, 
 - [x] Re-run after snapshot **after** test execution (terminal screenshot reviewed).
 - [x] Inspect both committed before/after snapshots and record actual timestamps, commit, status and modified paths.
 - [x] Confirm both Test Runner screenshots and both traceability snapshots are committed to the repository.
-- [ ] Review local `ProjectSettings/ProjectSettings.asset` changes, without discarding them.
+- [x] Review full local `ProjectSettings/ProjectSettings.asset` diff (platform targets, build numbers and pixel density).
+- [ ] Verify backup and chosen restore/commit disposition; confirm subsequent Git worktree state.
 - [x] Record project Unity version and tester-entered running Editor version from both snapshots.
 - [ ] Independently verify running Editor build and, optionally, export NUnit XML on a future run.
 
