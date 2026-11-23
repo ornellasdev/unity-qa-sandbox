@@ -2,7 +2,7 @@
 
 This is a **license-free, advisory heuristic scanner**, integrated into the existing [C# Static Analysis workflow](../.github/workflows/csharp-static-analysis.yml).
 
-It checks C# files in `Assets/` using Python's standard library. It does not run the Unity Editor, consume a Unity license, compile C#, execute NUnit tests, or use Roslyn. The expanded workflow passed on GitHub Actions, confirmed by a repository-owner screenshot (17 seconds, five advisory UNITY002 warnings).
+It checks C# files in `Assets/` using Python's standard library. It does not run the Unity Editor, consume a Unity license, compile C#, execute NUnit tests, or use Roslyn. The original expanded workflow passed with five advisory UNITY002 warnings (owner screenshot, 17 seconds). After the false-positive refinement, the owner reported a green run **without warnings**. The exact follow-up run URL has not yet been recorded.
 
 ## Rules
 
@@ -42,5 +42,5 @@ In the GitHub Actions workflow, unit tests for the checker run first. The scanne
 - [x] Review five UNITY002 findings (four scene-builder primitives; one prior-asserted PlayerHealth test access)
 - [x] Implement UNITY002 suppression for prior NUnit assertions and components supplied by primitive creation
 - [x] Add eight regression cases for safe and unsafe scenarios (16 total)
-- [ ] Verify new CI run passes and inspect whether the original five UNITY002 warnings disappear
+- [x] Owner confirmed the refined CI run passed with no warnings (exact run URL not yet recorded)
 - [ ] Consider richer Roslyn-based analysis with proper Unity references in the future
