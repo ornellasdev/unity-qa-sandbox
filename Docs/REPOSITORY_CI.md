@@ -39,10 +39,16 @@ It runs on changes to `Assets/**`, `Packages/**`, `ProjectSettings/**`, the vali
 
 The repository owner provided a GitHub Actions screenshot showing **Unity repository static checks — succeeded (7s)**. The generated-folder check reported `No tracked Unity generated folders detected.` This verifies the repository-validation workflow completed successfully; it does **not** verify Unity Editor compilation or gameplay tests. The exact workflow run URL/ID has not been recorded in this document.
 
+## Post-upgrade verification
+
+Following updates to `actions/checkout@v5` and `actions/setup-python@v6`, the repository owner reported a green GitHub Actions result. The specific run URL and complete warning log have not yet been inspected, so the report does not claim that all deprecation notices disappeared.
+
 ## Roadmap
 
 - [x] Publish license-free validation script and workflow
 - [x] Confirm the first GitHub Actions run succeeds (screenshot reviewed)
+- [x] Owner reported successful post-upgrade validation
+- [ ] Review post-upgrade warnings if a warning-free result is required
 - [ ] Require this check on pull requests after initial validation
 - [ ] Add optional C# formatting/linting after verifying Unity-compatible tooling
 - [ ] Separately resolve authorized licensing and runtime for Unity test execution
