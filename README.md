@@ -96,7 +96,7 @@ Evidence/
 
 **Unity-specific code-quality checks:** [Unity code quality guide](Docs/UNITY_CODE_QUALITY.md) documents five advisory checks for legacy object search, unchecked component member access, and frequent lookups in frame callbacks. Sixteen standard-library regression tests protect the checker. After refining UNITY002, the repository owner reported **a green GitHub Actions run with no warnings**. The exact run URL has not been recorded.
 
-**Static QA evidence (new):** The [C# Static Analysis workflow](.github/workflows/csharp-static-analysis.yml) now generates a per-run Markdown report, diagnostic logs, and **Python analyzer line coverage** in a downloadable GitHub Actions artifact. This is **not C# or gameplay coverage**. See the [reports guide](Docs/STATIC_QA_REPORTS.md). The repository owner reports a successful, warning-free run and provided a screenshot confirming the downloaded `static-qa-evidence` artifact contains all five expected files. The coverage percentage remains unverified.
+**Static QA evidence (new):** The [C# Static Analysis workflow](.github/workflows/csharp-static-analysis.yml) now generates a per-run Markdown report, diagnostic logs, and **Python analyzer line coverage** in a downloadable GitHub Actions artifact. This is **not C# or gameplay coverage**. See the [reports guide](Docs/STATIC_QA_REPORTS.md). The repository owner reports a successful, warning-free run and provided a screenshot confirming the downloaded `static-qa-evidence` artifact contains all five expected files. Uploaded report and coverage XML confirm **76.1% Python analyzer line coverage (121/159 lines), 16/16 regression tests, 13 C# files scanned and zero findings** in [run 45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954).
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
@@ -135,7 +135,7 @@ Evidence/
 - [x] Publish static CI QA reports, diagnostic artifacts and Python analyzer coverage ([guide](Docs/STATIC_QA_REPORTS.md))
 - [x] Confirm the static QA reporting workflow completed successfully without warnings (owner-reported)
 - [x] Verify a downloadable `static-qa-evidence` artifact contains the five expected files (owner screenshot)
-- [ ] Record the actual Python analyzer coverage percentage from `QA_SUMMARY.md` or `coverage.xml`
+- [x] Record verified Python analyzer coverage from uploaded CI artifact: **76.1% (121/159 lines)**, 16/16 tests passing, 0 findings ([run](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954))
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
