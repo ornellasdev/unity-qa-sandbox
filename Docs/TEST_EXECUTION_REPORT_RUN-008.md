@@ -20,7 +20,8 @@ Edit Mode includes 17 `HealthModelTests` and 5 `CheckpointModelTests`. Play Mode
 - Commit printed by the script: `4b1b8396d96e7e1e68e33143768e50fd13834e6f`.
 - Working-tree status at before capture: **DIRTY**, including a previously known local `ProjectSettings/ProjectSettings.asset` modification (the complete snapshot file has not yet been provided for inspection).
 - An **after** snapshot was initially created immediately after the before snapshot, **before the displayed Unity test execution**. Therefore, that initial after snapshot is **not adequate evidence of post-test state**.
-- Required: rerun the after-snapshot command after the tests and inspect both generated Markdown files. Neither snapshot file has yet been uploaded to the GitHub repository.
+- The tester **reran the after-snapshot command after the displayed Unity tests**. The subsequent terminal screenshot confirms creation of `Evidence/Traceability/RUN-008-after.md`, HEAD `4b1b8396d96e7e1e68e33143768e50fd13834e6f`, and **DIRTY** working tree. The snapshot contents are not yet inspected or committed to GitHub.
+- The displayed Git status after the command shows `M ProjectSettings/ProjectSettings.asset` and `?? Evidence/Traceability/`. A partial `git diff` displayed changes to Apple platform version settings, including iOS, tvOS, and macOS targets; the full diff was not provided, so these changes should not be classified as harmless without review.
 - Exact local Unity project files open during testing, SHA of modified configuration contents, and whether files changed during tests: **not independently established**.
 
 ## Evidence
@@ -35,7 +36,7 @@ Edit Mode includes 17 `HealthModelTests` and 5 `CheckpointModelTests`. Play Mode
 - [x] Observe Edit Mode 22/22 PASS screenshot.
 - [x] Observe Play Mode 7/7 PASS screenshot.
 - [x] Observe before-snapshot command and commit output.
-- [ ] Re-run after snapshot **after** test execution.
+- [x] Re-run after snapshot **after** test execution (terminal screenshot reviewed).
 - [ ] Inspect `Evidence/Traceability/RUN-008-before.md` and `RUN-008-after.md` (record actual timestamps, status and modified paths).
 - [ ] Commit the two Test Runner screenshot files and traceability snapshots.
 - [ ] Review local `ProjectSettings/ProjectSettings.asset` changes, without discarding them.
