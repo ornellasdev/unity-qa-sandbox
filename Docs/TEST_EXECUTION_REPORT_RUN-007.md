@@ -1,6 +1,6 @@
-# RUN-007 — Negative-path and boundary regression plan
+# RUN-007 — Negative-path and boundary regression execution
 
-**Status: IMPLEMENTED / AWAITING LOCAL UNITY EXECUTION.** This is a test design and change record, **not** a claim of passed Unity tests.
+**Status: PASS — locally executed in Unity Test Runner, evidenced by two tester-provided screenshots.** This does not represent a GitHub Actions Unity test run.
 
 ## Change scope
 
@@ -39,13 +39,15 @@
 
 ## Execution record
 
-- EditMode: **NOT RUN / NOT VERIFIED** (22 tests implemented)
-- PlayMode regression: **NOT RUN / NOT VERIFIED** (7 existing tests)
-- Target environment: Unity Editor 6000.6.10f1 / CachyOS
-- Actual editor version: pending
-- Actual commit and worktree state: pending
-- Screenshots / XML: pending
-- Defects discovered during run: pending
+- EditMode: **PASS, 22/22** (HealthModelTests **17/17**, CheckpointModelTests **5/5**); zero failed / zero inconclusive; Test Runner screenshot shows **0.010s**.
+- PlayMode regression: **PASS, 7/7** (PLAY001–PLAY007); zero failed / zero inconclusive; screenshot shows **1.152s**.
+- Execution evidence: **two screenshots provided in the conversation** — EditMode and PlayMode Test Runner views; they have **not yet been committed to the repository**.
+- Target environment: Unity Editor 6000.6.10f1 / CachyOS.
+- Actual editor build number in screenshot: **not displayed**; cannot independently verify version from screenshot.
+- Exact local commit / worktree state during execution: **not recorded**.
+- XML export: **not supplied**.
+- Defects observed in the displayed results: **none**; all displayed tests passed.
+- Test context: **local Unity Editor execution**, not licensed Unity GitHub Actions CI.
 
 ## CI scope
 
