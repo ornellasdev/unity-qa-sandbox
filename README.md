@@ -111,7 +111,7 @@ Assets/
   Tests/PlayMode/Tests/
 Docs/
   TEST_PLAN.md
-  TEST_EXECUTION_REPORT_RUN-001.md ... RUN-007.md
+  TEST_EXECUTION_REPORT_RUN-001.md ... RUN-008.md
   STATIC_QA_REPORTS.md
   UNITY_CODE_QUALITY.md
 Evidence/
@@ -141,6 +141,7 @@ To capture precise **test-time** Git, Unity Editor and environment metadata for 
 - [x] Playable 3D Unity prototype and committed scene.
 - [x] Health, checkpoint, damage and respawn components.
 - [x] **RUN-007: 29/29 locally executed Unity tests passed**, including 13 new negative-path/boundary tests.
+- [x] **RUN-008: 29/29 Unity Test Runner tests passed again locally** (22 Edit Mode + 7 Play Mode, screenshots reviewed; [report](Docs/TEST_EXECUTION_REPORT_RUN-008.md)); before-snapshot captured on commit `4b1b839`, but final traceability evidence is still pending.
 - [x] Evidence-backed manual QA reports, gameplay video, and screenshot collection.
 - [x] License-free repository and C# analysis workflows.
 - [x] **35 Python analyzer tests, 98.1% coverage**, automated QA artifacts and ≥85% coverage threshold.
@@ -151,7 +152,8 @@ To capture precise **test-time** Git, Unity Editor and environment metadata for 
 - [x] Publish supplemental RUN-003 Console evidence ([RUN-003.png](Evidence/RUN-003.png)); damage, health reset, and respawn shown.
 - [ ] Capture distinct RUN-003 spawn-destination evidence and record full test-time environment/commit metadata on future Unity executions.
 - [x] Publish a before/after QA environment snapshot script and traceability checklist ([guide](Docs/TEST_TRACEABILITY.md)).
-- [ ] Capture before/after environment snapshots during the next actual Unity test run.
+- [x] Capture RUN-008 before-test environment metadata with the new script (working tree DIRTY).
+- [ ] Rerun RUN-008 after-test snapshot following the actual tests; upload both snapshots and two Test Runner screenshots.
 - [ ] Review the locally modified `ProjectSettings/ProjectSettings.asset` before deciding whether to commit or restore it.
 - [ ] Extend negative-path coverage and maintain defect/regression records.
 - [ ] Enable Unity hosted Edit Mode/Play Mode CI **only when an authorized Unity CI licensing setup exists**, then archive actual NUnit XML results.
