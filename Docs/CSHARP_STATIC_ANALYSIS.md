@@ -1,6 +1,6 @@
 # C# Static Analysis — no Unity license required
 
-**Status:** workflow published; initial GitHub Actions execution not yet confirmed.
+**Status:** GitHub Actions execution succeeded (previous screenshot reviewed); repository owner also reports a green result following the Node.js 24 action upgrade. Latest warning details have not been independently reviewed.
 
 The [C# Static Analysis workflow](../.github/workflows/csharp-static-analysis.yml) uses the open-source **Tree-sitter C# grammar** to parse C# files under `Assets/`. It does not open Unity, consume a Unity license seat, or access any account secrets.
 
@@ -43,13 +43,15 @@ The CI workflow runs on relevant pushes to `main`, pull requests changing C# cod
 - The Unity project still requires Unity for authoritative compilation and gameplay tests.
 - Some preprocessor-dependent errors may not be detected by parsing alone.
 - Style warnings are advisory; they do not indicate broken gameplay.
-- Workflow success must be verified from GitHub Actions before marking this CI milestone complete.
+- The first successful GitHub Actions run was supported by a screenshot. A subsequent post-upgrade green result was reported by the repository owner; green status alone does not establish zero warnings.
 
 ## Roadmap
 
 - [x] Publish parser-based C# static analysis script
 - [x] Add GitHub Actions on pushes / PRs
-- [ ] Verify first successful C# analysis run
+- [x] Verify first successful C# analysis run
+- [x] Owner reported successful rerun after Node.js 24 upgrade
+- [ ] Confirm warning-free post-upgrade logs
 - [ ] Review warnings and adopt a consistent C# format policy
 - [ ] Evaluate Roslyn-based analysis when Unity assemblies can be resolved reliably
 - [ ] Run actual Unity Edit Mode/Play Mode tests in an authorized CI environment
