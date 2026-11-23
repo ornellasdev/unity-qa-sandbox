@@ -14,7 +14,7 @@ This report documents **tester-reported regression results** following the damag
 | Unity version | Unity 6.6 (6000.6.10f1) — previously confirmed |
 | Test method | Manual gameplay regression + local Unity Test Runner Edit Mode |
 | Result source | Tester-reported execution results in conversation |
-| Screenshot/log evidence for RUN-003 | Unity Console screenshot supplied in chat on 2026-11-23; **not yet committed to repository** |
+| Screenshot/log evidence for RUN-003 | Unity Console screenshot supplied in chat on 2026-11-23 and committed as [RUN-003.png](../Evidence/RUN-003.png) |
 | Working tree check (subsequent snapshot) | `git status --short` showed only `?? unity-qa-sandbox/` (untracked nested folder), with no tracked-file modifications listed; exact state at test time and active Unity project path not independently verified |
 
 ## Executed checks
@@ -31,7 +31,7 @@ This report documents **tester-reported regression results** following the damag
 
 A new screenshot shared in chat displays the Unity Console with the following messages: `Damage Zone initialized`, `Player entered Damage Zone!`, `Health: 0/100`, `Health after respawn: 100`, and `Player respawned`. The visible Console counters show **0 errors** and **0 warnings**. This supports successful triggering of damage, zero health, restoration to 100 and execution of a respawn in the displayed run. It does **not** identify the initial-spawn vs checkpoint-spawn destination, prove both scenarios, or independently demonstrate the previously reported nine Edit Mode results. The screenshot was provided after the original RUN-003 and is supplemental evidence, not proof that it was captured during the original 2026-11-22 run.
 
-**Repository evidence status:** awaiting upload as `Evidence/RUN-003-Console-Respawn.png`; this relative path is a suggested filename only, not a currently verified link.
+**Repository evidence:** [Evidence/RUN-003.png](../Evidence/RUN-003.png) (verified present in GitHub repository). The Console screenshot supports the damage/health reset/respawn flow; it does not prove both spawn destinations or the nine Edit Mode test results.
 
 ## Scope and limits
 
@@ -45,14 +45,14 @@ A new screenshot shared in chat displays the Unity Console with the following me
 
 - [ ] Upload a screenshot showing the nine Edit Mode results specifically from RUN-003
 - [x] Review supplementary Console screenshot in chat (damage / health reset / respawn; scenario identity not determined)
-- [ ] Commit supplementary Console screenshot to `Evidence/RUN-003-Console-Respawn.png`
+- [x] Commit supplementary Console screenshot as [Evidence/RUN-003.png](../Evidence/RUN-003.png)
 - [ ] Add visual evidence of the two distinct manual respawn regression scenarios
 - [ ] Capture a Console/gameplay recording for both respawn cases
 - [x] Review subsequent `git status --short`: no tracked changes; untracked nested `unity-qa-sandbox/` present
 - [ ] Confirm Unity Editor project path and whether the nested folder contains a second project
 - [ ] Record optional CachyOS release/kernel information
 - [x] Initial three Play Mode component tests published separately (RUN-004)
-- [ ] Add GitHub Actions / CI, if suitable for the Unity project
+- [x] License-free repository validation and static C# analysis GitHub Actions workflows are published; Unity Test Runner CI remains gated pending authorized licensing
 
 ## Related records
 
