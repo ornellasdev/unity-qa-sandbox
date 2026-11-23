@@ -24,7 +24,10 @@ namespace UnityQASandbox
         public void Heal(int amount)
         {
             if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
-            CurrentHealth = Math.Min(MaxHealth, CurrentHealth + amount);
+            // Compare before adding to avoid integer overflow on very large heals.
+            CurrentHealth = amount >= MaxHealth - CurrentHealth
+                ? MaxHealth
+                : CurrentHealth + amount;
         }
 
         public void Reset() => CurrentHealth = MaxHealth;
