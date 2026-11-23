@@ -24,13 +24,13 @@ The reports are per-run artifacts; they are **not** a permanent public historica
 
 ## Latest confirmation
 
-The repository owner reported a successful, warning-free run of the updated C# static analysis workflow. The report artifact and its precise Python coverage metric have not yet been inspected; success alone does not establish their presence or value.
+The repository owner reported a successful, warning-free run of the updated C# static analysis workflow. The repository owner shared a screenshot of the extracted `static-qa-evidence` ZIP showing `QA_SUMMARY.md`, `coverage.xml`, `analyzer-tests.log`, `csharp-syntax.log` and `unity-patterns.log`. The file contents and precise Python coverage percentage have not yet been examined.
 
 ## Current state
 
 - [x] Publish artifact generation and workflow summary
 - [x] Add Python analyzer line-coverage export
 - [x] Confirm a successful run of the updated workflow (owner-reported)
-- [ ] Verify the `static-qa-evidence` artifact exists and contains the expected files
+- [x] Verify the `static-qa-evidence` artifact exists and contains the expected five files (owner screenshot)
 - [ ] Record a verified example run URL and its actual coverage percentage
 - [ ] Add Unity C# and gameplay coverage only after licensed Unity tests can run
