@@ -136,6 +136,8 @@ Evidence/
 - [x] Confirm the static QA reporting workflow completed successfully without warnings (owner-reported)
 - [x] Verify a downloadable `static-qa-evidence` artifact contains the five expected files (owner screenshot)
 - [x] Record verified Python analyzer coverage from uploaded CI artifact: **76.1% (121/159 lines)**, 16/16 tests passing, 0 findings ([run](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954))
+- [x] Add 19 new Python analyzer regression tests (35 total) and configure an 85% Python line-coverage threshold
+- [ ] Confirm post-change CI and actual Python analyzer coverage >=85% (baseline: 76.1%)
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
