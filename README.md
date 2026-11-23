@@ -92,7 +92,7 @@ Evidence/
 
 **License-free repository checks:** [Repository Validation](.github/workflows/repository-validation.yml) runs automatically on relevant pushes and pull requests. It checks required files, Unity `.meta` consistency, JSON and assembly definitions, project version, and committed generated folders. It requires **no Unity Editor or license**. The first successful GitHub Actions run has been **confirmed by the repository owner's workflow screenshot** (job: `Unity repository static checks`, 7 seconds). See the [static CI guide](Docs/REPOSITORY_CI.md).
 
-**C# source analysis:** [C# Static Analysis](.github/workflows/csharp-static-analysis.yml) parses Unity C# scripts with Tree-sitter and detects syntax errors without a Unity license. Trailing whitespace and tabs are advisory warnings. **First GitHub Actions run is pending confirmation.** See [analysis guide](Docs/CSHARP_STATIC_ANALYSIS.md). This is not Roslyn analysis or Unity compilation.
+**C# source analysis:** [C# Static Analysis](.github/workflows/csharp-static-analysis.yml) parses Unity C# scripts with Tree-sitter and detects syntax errors without a Unity license. Trailing whitespace and tabs are advisory warnings. **The first successful C# static analysis run and a subsequent green run after the Node.js 24 action upgrade were reported by the repository owner.** See [analysis guide](Docs/CSHARP_STATIC_ANALYSIS.md). This is not Roslyn analysis or Unity compilation.
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
@@ -119,7 +119,9 @@ Evidence/
 - [ ] Verify a successful manual CI run (9 Edit Mode + 7 Play Mode)
 - [ ] Enable automatic push checks with the `UNITY_CI_ENABLED=true` repository variable
 - [x] Publish license-free C# syntax/static hygiene workflow ([workflow](.github/workflows/csharp-static-analysis.yml))
-- [ ] Verify first C# static analysis GitHub Actions run and review findings
+- [x] Confirm successful C# static analysis GitHub Actions run (owner screenshot reviewed previously)
+- [x] Confirm C# analysis and repository validation remained green after Node.js 24 action updates (owner-reported)
+- [ ] Inspect latest post-upgrade logs to confirm no remaining Node.js/whitespace warnings
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
