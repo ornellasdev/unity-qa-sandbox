@@ -79,3 +79,6 @@ jobs:
           path: artifacts/qa-static/
           retention-days: 30
           if-no-files-found: warn
+
+      - name: Enforce 85 percent Python analyzer line coverage
+        run: python -m coverage report --include='*/check_unity_patterns.py' --fail-under=85
