@@ -29,7 +29,8 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 | Checkpoint logic (2 methods) | NUnit Edit Mode | ✅ 2/2 Passed — screenshot reviewed |
 | Gameplay components (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-004 screenshot published |
 | Physics trigger interactions (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-005 screenshot reviewed in chat |
-| Full serialized QASandbox scene (PLAY007) | Unity Play Mode / Editor | Not Run — awaiting Unity validation |
+| Full serialized QASandbox scene (PLAY007) | Unity Play Mode / Editor | ✅ PASS in initial RUN-006 |
+| Full seven-test regression suite | Unity Play Mode | ⚠️ RUN-006 initial attempt: 4 passed, 3 failed; rerun pending after isolation change |
 | WASD movement, jump, collision, checkpoint respawn, airborne double-jump prevention, initial-spawn respawn | Manual | ✅ 6 observed checks passed — tester reported |
 | Full-health restoration at initial spawn and activated checkpoint | Manual | ✅ 2 scenarios passed — tester reported; Console screenshot reviewed in chat |
 
@@ -37,7 +38,7 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 
 **Total distinct automated test methods reported passed across Edit Mode and Play Mode: 15 (9 + 6)**. Tests were run locally, not in CI.
 
-🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [RUN-003 regression report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) · [RUN-004 Play Mode report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) · [RUN-005 physics integration report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
+🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [RUN-003 regression report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) · [RUN-004 Play Mode report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) · [RUN-005 physics integration report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) · [RUN-006 initial failed regression](Docs/TEST_EXECUTION_REPORT_RUN-006.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
 
 > RUN-001 has screenshot evidence of local Unity Test Runner results, not independent CI validation. RUN-002 is based on tester-reported manual observations, with Console screenshot reviewed in chat but not yet uploaded to the repository. Environment: **CachyOS (Linux)** and **Unity 6.6 (6000.6.10f1)**; exact tested commit is not recorded.
 
@@ -56,7 +57,9 @@ An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri
 - [x] Execute six Play Mode tests: 6/6 PASS (RUN-005 screenshot reviewed in chat)
 - [ ] Upload RUN-005 screenshot to GitHub and record exact tested commit
 - [x] Add PLAY007 serialized scene validation test source
-- [ ] Execute PLAY007 and publish a RUN-006 report with evidence
+- [x] Execute PLAY007: passed in initial RUN-006
+- [x] Record initial RUN-006 failure: 4 passed, 3 failed
+- [ ] Rerun all seven Play Mode tests after scene-isolation change and attach evidence
 - [ ] Add CI for Unity test suites
 
 **Author:** [Yuri Ornellas](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/)
