@@ -9,7 +9,7 @@ Created and maintained by [Yuri Ornellas](https://github.com/ornellasdev)
 [![Repository Validation](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/repository-validation.yml/badge.svg)](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/repository-validation.yml)
 [![C# Static Analysis](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/csharp-static-analysis.yml/badge.svg)](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/csharp-static-analysis.yml)
 
-> **Latest verified Unity Test Runner result — RUN-007:** **29/29 tests passed locally** (**22 Edit Mode + 7 Play Mode**), supported by two screenshots committed to this repository.  
+> **Latest documented Unity Test Runner result — RUN-008:** **29/29 tests passed locally** (**22 Edit Mode + 7 Play Mode**), supported by two screenshots and before/after Git environment snapshots committed to this repository.  
 > **Latest verified license-free CI result:** **35/35 Python analyzer regression tests passed**, **98.1% Python analyzer line coverage**, **13 C# files checked**, and **0 C# syntax, style, or Unity-heuristic findings** ([GitHub Actions run](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102487210)).  
 > **Scope matters:** Python analyzer coverage is **not Unity/C# gameplay coverage**. Unity's NUnit suites have **not** been verified running in hosted GitHub Actions.
 
@@ -27,8 +27,8 @@ Unity QA Sandbox is an original, playable 3D graybox project built to demonstrat
 
 | Layer | What it checks | Verified result |
 |---|---|---|
-| **Unity Edit Mode — NUnit** | `HealthModel` boundaries, invalid inputs, saturation, reset; `CheckpointModel` positions and activation | **22/22 PASS — local RUN-007** (17 health + 5 checkpoint) |
-| **Unity Play Mode — NUnit / UnityTest** | Damage, health restoration, checkpoint state, physical triggers, full scene components | **7/7 PASS — local RUN-007** |
+| **Unity Edit Mode — NUnit** | `HealthModel` boundaries, invalid inputs, saturation, reset; `CheckpointModel` positions and activation | **22/22 PASS — local RUN-008** (17 health + 5 checkpoint) |
+| **Unity Play Mode — NUnit / UnityTest** | Damage, health restoration, checkpoint state, physical triggers, full scene components | **7/7 PASS — local RUN-008** |
 | **Manual functional QA** | Movement, collision, jump / double-jump prevention, initial respawn, checkpoint respawn | **4 formal cases / 8 checks reported PASS — RUN-002**; video supports damage and health-reset flow, not every scenario |
 | **C# syntax and hygiene CI** | Tree-sitter C# syntax, whitespace, Unity-specific heuristic warnings | **13 files, 0 findings — GitHub Actions run 45102487210** |
 | **Python analyzer regression CI** | Correctness of the independent Unity-pattern checking script | **35/35 PASS, 98.1% Python line coverage — same CI run** |
@@ -56,7 +56,7 @@ The **29 Unity tests** and the **35 Python analyzer tests** are separate test su
 | **RUN-007** | Negative cases and complete regression | [Report](Docs/TEST_EXECUTION_REPORT_RUN-007.md) | [Evidence 1](Evidence/RUN-007(1).png) · [Evidence 2](Evidence/RUN-007(2).png) |
 | **RUN-008** | Repeat Unity regression with before/after Git traceability | [Report](Docs/TEST_EXECUTION_REPORT_RUN-008.md) | [Edit Mode](Evidence/RUN-008(1).png) · [Play Mode](Evidence/RUN-008(2).png) · [Before](Evidence/Traceability/RUN-008-before.md) · [After](Evidence/Traceability/RUN-008-after.md) |
 
-**Evidence limitations:** RUN-007 screenshots establish the displayed **22/22 Edit Mode** and **7/7 Play Mode** results, but do not show the exact test-time Git commit or a clean working tree. The RUN-002 video includes the damage/health restoration sequence; formal movement, collision, double-jump, and distinct initial/checkpoint respawn observations remain tester-reported unless separately recorded.
+**Evidence limitations:** RUN-008 screenshots show **22/22 Edit Mode** and **7/7 Play Mode** passing; its before/after snapshots record the same commit (`4b1b8396`) and a **DIRTY** worktree during that run. Afterward, the tester preserved both configuration backups, restored only `ProjectSettings/ProjectSettings.asset`, and confirmed `main...origin/main` with no local changes. This later clean state does **not** change the historical RUN-008 execution conditions. The RUN-002 video includes the damage/health restoration sequence; formal movement, collision, double-jump, and distinct initial/checkpoint respawn observations remain tester-reported unless separately recorded.
 
 ## GitHub Actions — what runs without Unity
 
@@ -119,6 +119,10 @@ Evidence/
   RUN-002-Gameplay-Respawn.mp4
   RUN-007(1).png
   RUN-007(2).png
+  RUN-008(1).png
+  RUN-008(2).png
+  Traceability/RUN-008-before.md
+  Traceability/RUN-008-after.md
   (earlier RUN screenshots)
 scripts/
   check_csharp.py
@@ -148,14 +152,14 @@ To capture precise **test-time** Git, Unity Editor and environment metadata for 
 - [x] **35 Python analyzer tests, 98.1% coverage**, automated QA artifacts and ≥85% coverage threshold.
 - [x] Node.js 24-compatible GitHub Actions dependencies in the active static pipelines.
 
-**Next**
+**Next (optional future improvements; current portfolio milestone complete)**
 - [ ] Capture additional RUN-002 manual video evidence for collision, double-jump prevention, and separately identified respawn paths.
 - [x] Publish supplemental RUN-003 Console evidence ([RUN-003.png](Evidence/RUN-003.png)); damage, health reset, and respawn shown.
 - [ ] Capture distinct RUN-003 spawn-destination evidence and record full test-time environment/commit metadata on future Unity executions.
 - [x] Publish a before/after QA environment snapshot script and traceability checklist ([guide](Docs/TEST_TRACEABILITY.md)).
 - [x] Verify RUN-008 before/after snapshots, screenshots, timestamp, Git HEAD, Unity project version and dirty working-tree status.
-- [ ] Review local `ProjectSettings/ProjectSettings.asset` diff fully; snapshots record modified path but not full content.
-- [ ] Review the locally modified `ProjectSettings/ProjectSettings.asset` before deciding whether to commit or restore it.
+- [x] Review the full `ProjectSettings/ProjectSettings.asset` diff, preserve `.asset` and `.diff` backups, and restore the tracked version after RUN-008.
+- [x] Confirm clean, synchronized local `main...origin/main` status after reconciling the untracked traceability files (tester terminal confirmation; separate from the historical RUN-008 snapshot).
 - [ ] Extend negative-path coverage and maintain defect/regression records.
 - [ ] Enable Unity hosted Edit Mode/Play Mode CI **only when an authorized Unity CI licensing setup exists**, then archive actual NUnit XML results.
 
