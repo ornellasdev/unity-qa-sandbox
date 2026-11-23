@@ -7,6 +7,7 @@ By [Yuri Ornellas](https://github.com/ornellasdev)
 ![C#](https://img.shields.io/badge/Code-C%23-512BD4)
 ![QA](https://img.shields.io/badge/QA-Manual%20%2B%20Automated-blue)
 [![Repository Validation](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/repository-validation.yml/badge.svg)](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/repository-validation.yml)
+[![C# Static Analysis](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/csharp-static-analysis.yml/badge.svg)](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/csharp-static-analysis.yml)
 ![Unity CI](https://img.shields.io/badge/Unity%20CI-License%20pending-lightgrey)
 
 This repository demonstrates an **original, playable graybox prototype** alongside manual test cases, C# NUnit tests, physics-trigger integration checks, a serialized-scene test, regression investigations, and documented local test runs.
@@ -91,6 +92,8 @@ Evidence/
 
 **License-free repository checks:** [Repository Validation](.github/workflows/repository-validation.yml) runs automatically on relevant pushes and pull requests. It checks required files, Unity `.meta` consistency, JSON and assembly definitions, project version, and committed generated folders. It requires **no Unity Editor or license**. The first successful GitHub Actions run has been **confirmed by the repository owner's workflow screenshot** (job: `Unity repository static checks`, 7 seconds). See the [static CI guide](Docs/REPOSITORY_CI.md).
 
+**C# source analysis:** [C# Static Analysis](.github/workflows/csharp-static-analysis.yml) parses Unity C# scripts with Tree-sitter and detects syntax errors without a Unity license. Trailing whitespace and tabs are advisory warnings. **First GitHub Actions run is pending confirmation.** See [analysis guide](Docs/CSHARP_STATIC_ANALYSIS.md). This is not Roslyn analysis or Unity compilation.
+
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
 ## 🗺️ Roadmap
@@ -115,7 +118,9 @@ Evidence/
 - [ ] Configure required Unity license secrets privately in GitHub Actions
 - [ ] Verify a successful manual CI run (9 Edit Mode + 7 Play Mode)
 - [ ] Enable automatic push checks with the `UNITY_CI_ENABLED=true` repository variable
-- [ ] Collect and link CI XML/log artifacts after the workflow successfully runs
+- [x] Publish license-free C# syntax/static hygiene workflow ([workflow](.github/workflows/csharp-static-analysis.yml))
+- [ ] Verify first C# static analysis GitHub Actions run and review findings
+- [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
 ## 📫 Contact
