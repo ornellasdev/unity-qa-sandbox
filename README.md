@@ -100,7 +100,7 @@ Evidence/
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
-**Negative-path regression expansion (local execution confirmed):** Added **13 new Unity Edit Mode NUnit cases** covering invalid health inputs, saturating heals, repeated damage, and checkpoint boundaries, plus an overflow-safe heal fix. **RUN-007 passed locally: 22/22 Edit Mode + 7/7 Play Mode**, confirmed by two Unity Test Runner screenshots; screenshots have not yet been added to the repository. See [RUN-007](Docs/TEST_EXECUTION_REPORT_RUN-007.md).
+**Negative-path regression expansion (local execution confirmed):** Added **13 new Unity Edit Mode NUnit cases** covering invalid health inputs, saturating heals, repeated damage, and checkpoint boundaries, plus an overflow-safe heal fix. **RUN-007 passed locally: 22/22 Edit Mode + 7/7 Play Mode**, confirmed by two Unity Test Runner screenshots now committed as [RUN-007(1).png](Evidence/RUN-007(1).png) and [RUN-007(2).png](Evidence/RUN-007(2).png). See [RUN-007](Docs/TEST_EXECUTION_REPORT_RUN-007.md).
 
 ## 🗺️ Roadmap
 
@@ -144,7 +144,8 @@ Evidence/
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [x] Implement 13 additional NUnit negative-path/boundary tests and overflow-safe heal fix ([RUN-007](Docs/TEST_EXECUTION_REPORT_RUN-007.md))
 - [x] Execute RUN-007 locally: **22/22 Edit Mode and 7/7 Play Mode PASS** (two tester screenshots; [report](Docs/TEST_EXECUTION_REPORT_RUN-007.md))
-- [ ] Add RUN-007 screenshot evidence to repository and capture exact Unity version/commit/clean-worktree information
+- [x] Add both RUN-007 screenshot evidence files to repository ([1](Evidence/RUN-007(1).png), [2](Evidence/RUN-007(2).png))
+- [ ] Record exact Unity editor build, tested commit SHA and clean-worktree status for RUN-007
 - [x] Triage RUN-007 test outcomes: no failures observed in the 29 tests displayed; no Unity CI execution claimed
 
 ## 📫 Contact
