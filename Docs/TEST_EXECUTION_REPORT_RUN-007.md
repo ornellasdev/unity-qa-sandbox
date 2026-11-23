@@ -41,7 +41,7 @@
 
 - EditMode: **PASS, 22/22** (HealthModelTests **17/17**, CheckpointModelTests **5/5**); zero failed / zero inconclusive; Test Runner screenshot shows **0.010s**.
 - PlayMode regression: **PASS, 7/7** (PLAY001–PLAY007); zero failed / zero inconclusive; screenshot shows **1.152s**.
-- Execution evidence: **two screenshots provided in the conversation** — EditMode and PlayMode Test Runner views; they have **not yet been committed to the repository**.
+- Execution evidence: **two Test Runner screenshot files are now committed to the repository**: [RUN-007(1).png](../Evidence/RUN-007(1).png) and [RUN-007(2).png](../Evidence/RUN-007(2).png). The tester-provided EditMode and PlayMode screenshots show the passing results listed above; image filenames alone do not establish which test mode each file depicts.
 - Target environment: Unity Editor 6000.6.10f1 / CachyOS.
 - Actual editor build number in screenshot: **not displayed**; cannot independently verify version from screenshot.
 - Exact local commit / worktree state during execution: **not recorded**.
