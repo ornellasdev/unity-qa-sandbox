@@ -14,7 +14,7 @@ This report documents the first **Play Mode** automated gameplay-component tests
 | Runner | Unity Test Runner / Play Mode |
 | Test source published in | [`3f602ea`](https://github.com/ornellasdev/unity-qa-sandbox/commit/3f602eac5985c0b85c47f6db670d360d2d3f562f) |
 | Exact commit at the moment of execution | Not recorded; local tests were run before the source commit was created |
-| Evidence | Play Mode Test Runner screenshot shared and visually reviewed in conversation; not yet uploaded to repository |
+| Evidence | [RUN-004.png](../Evidence/RUN-004.png) — uploaded to repository; matching screenshot reviewed in conversation |
 | Independent CI verification | Not performed |
 
 ## Test results
@@ -32,13 +32,13 @@ The tester-provided Test Runner screenshot shows three green tests and no failur
 ## Coverage limits
 
 - These tests exercise Unity gameplay components in Play Mode, but call methods directly. They do **not** simulate physical collision or trigger entry into the red damage zone or green checkpoint zone.
-- The execution is evidenced by a screenshot shared in conversation; the repository does not yet contain the original RUN-004 image or an exported XML report.
+- The execution is evidenced by a screenshot shared in conversation; the repository now contains the Play Mode screenshot at [`Evidence/RUN-004.png`](../Evidence/RUN-004.png); an exported XML report remains pending.
 - The test source was subsequently committed in `3f602ea`. Although the tester ran these tests before that commit, this does not prove a pristine checkout of that exact Git revision was tested.
 - No claim of independent CI execution is made.
 
 ## Pending follow-up
 
-- [ ] Upload Play Mode Test Runner screenshot to `Evidence/RUN-004.png`
+- [x] Upload Play Mode Test Runner screenshot to `Evidence/RUN-004.png`
 - [ ] Rerun against a known commit and record working-tree state, if reproducibility is required
 - [ ] Add physics-trigger-based Play Mode integration coverage
 - [ ] Add GitHub Actions / CI when practical
