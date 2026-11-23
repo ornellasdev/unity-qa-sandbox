@@ -26,6 +26,10 @@ The reports are per-run artifacts; they are **not** a permanent public historica
 
 The repository owner reported a successful, warning-free run of the updated C# static analysis workflow. The repository owner shared a screenshot of the extracted `static-qa-evidence` ZIP showing `QA_SUMMARY.md`, `coverage.xml`, `analyzer-tests.log`, `csharp-syntax.log` and `unity-patterns.log`. The owner subsequently supplied all five original artifact files. Verified report for [GitHub Actions run 45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954), revision `8868238d8de8d114b702c75fd36f1a7a83c5b00e`: **16/16 Python analyzer regression tests PASS**, **76.1% line coverage (121/159 executable lines)** for `scripts/check_unity_patterns.py`, **13 C# files scanned**, **0 syntax errors**, **0 style warnings**, and **0 Unity heuristic findings**. These are point-in-time static QA metrics, **not** Unity or C# gameplay coverage.
 
+## Python analyzer coverage target
+
+Baseline evidence from run [45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954) is **76.1%** (121 of 159 executable lines). Added 19 regression tests (35 total) exercising C# literal masking, incomplete input, the `typeof` pattern and analyzer CLI, including strict mode and unreadable UTF-8. The workflow now runs `coverage report --include='*/check_unity_patterns.py' --fail-under=85` after the evidence upload. **The updated run and actual new percentage still need verification**; the new threshold is a target, not a claimed measurement. This coverage is Python-only, not Unity C# gameplay coverage.
+
 ## Current state
 
 - [x] Publish artifact generation and workflow summary
@@ -33,4 +37,7 @@ The repository owner reported a successful, warning-free run of the updated C# s
 - [x] Confirm a successful run of the updated workflow (owner-reported)
 - [x] Verify the `static-qa-evidence` artifact exists and contains the expected five files (owner screenshot)
 - [x] Record verified run [45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954) and actual **76.1% Python analyzer line coverage** (121/159 lines)
+- [x] Add 19 regression tests to broaden analyzer Python coverage
+- [x] Configure a minimum of 85% Python analyzer line coverage in CI
+- [ ] Verify 35/35 tests pass and actual coverage meets the threshold on GitHub Actions
 - [ ] Add Unity C# and gameplay coverage only after licensed Unity tests can run
