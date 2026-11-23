@@ -115,17 +115,17 @@ def frame_spans(clean: str) -> list[tuple[int, int]]:
 # enclosing method, before the member access, and the receiver has not been
 # assigned again. It does not attempt whole-program data-flow analysis.
 DIRECT_COMPONENT = re.compile(
-    r"(?:(?P<receiver>\\b[A-Za-z_]\\w*)\\s*\\.\\s*)?"
-    r"GetComponent\\s*<\\s*(?P<component>[A-Za-z_]\\w*(?:\\.[A-Za-z_]\\w*)*)\\s*>\\s*\\(\\s*\\)\\s*\\."
+    r"(?:(?P<receiver>\b[A-Za-z_]\w*)\s*\.\s*)?"
+    r"GetComponent\s*<\s*(?P<component>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s*>\s*\(\s*\)\s*\."
 )
 DIRECT_COMPONENT_TYPEOF = re.compile(
-    r"\\bGetComponent\\s*\\(\\s*typeof\\([^()]+\\)\\s*\\)\\s*\\."
+    r"\bGetComponent\s*\(\s*typeof\([^()]+\)\s*\)\s*\."
 )
 METHOD_DECL = re.compile(
-    r"\\b(?:public|private|protected|internal)\\s+"
-    r"(?:(?:static|virtual|override|sealed|async|new)\\s+)*"
-    r"[A-Za-z_][\\w<>\\[\\],.?]*\\s+[A-Za-z_]\\w*\\s*"
-    r"\\([^;{}]*\\)\\s*\\{"
+    r"\b(?:public|private|protected|internal)\s+"
+    r"(?:(?:static|virtual|override|sealed|async|new)\s+)*"
+    r"[A-Za-z_][\w<>\[\],.?]*\s+[A-Za-z_]\w*\s*"
+    r"\([^;{}]*\)\s*\{"
 )
 PRIMITIVE_TYPES = {
     "Cube": {"BoxCollider", "Renderer", "MeshRenderer"},
@@ -171,27 +171,27 @@ def guaranteed_component(clean: str, match: re.Match[str]) -> bool:
     # Recognize an earlier NUnit assertion on exactly the same receiver/type.
     # Do not suppress if the receiver was subsequently reassigned.
     assertions = list(re.finditer(
-        rf"\\bAssert\\s*\\.\\s*NotNull\\s*\\(\\s*{name}\\s*\\.\\s*"
-        rf"GetComponent\\s*<\\s*{typ}\\s*>\\s*\\(\\s*\\)\\s*\\)",
+        rf"\bAssert\s*\.\s*NotNull\s*\(\s*{name}\s*\.\s*"
+        rf"GetComponent\s*<\s*{typ}\s*>\s*\(\s*\)\s*\)",
         prefix,
     ))
     for assertion in reversed(assertions):
         tail = prefix[assertion.end():]
-        if not re.search(rf"\\b{name}\\s*=(?!=)", tail):
+        if not re.search(rf"\b{name}\s*=(?!=)", tail):
             return True
 
     # GameObject.CreatePrimitive guarantees certain built-in components.
     # Only recognize the named variable initialized in the current method.
     for primitive in re.finditer(
-        rf"\\b(?:GameObject\\s+|var\\s+){name}\\s*=\\s*"
-        r"GameObject\\s*\\.\\s*CreatePrimitive\\s*\\(\\s*"
-        r"PrimitiveType\\s*\\.\\s*(\\w+)\\s*\\)",
+        rf"\b(?:GameObject\s+|var\s+){name}\s*=\s*"
+        r"GameObject\s*\.\s*CreatePrimitive\s*\(\s*"
+        r"PrimitiveType\s*\.\s*(\w+)\s*\)",
         prefix,
     ):
         if component not in PRIMITIVE_TYPES.get(primitive.group(1), set()):
             continue
         tail = prefix[primitive.end():]
-        if not re.search(rf"\\b{name}\\s*=(?!=)", tail):
+        if not re.search(rf"\b{name}\s*=(?!=)", tail):
             return True
     return False
 
@@ -201,9 +201,9 @@ def component_access_findings(clean: str, source: str) -> list[tuple[str, int, s
     hits = []
     for match in DIRECT_COMPONENT.finditer(clean):
         if not guaranteed_component(clean, match):
-            hits.append(("UNITY002", source.count("\\n", 0, match.start()) + 1, message))
+            hits.append(("UNITY002", source.count("\n", 0, match.start()) + 1, message))
     for match in DIRECT_COMPONENT_TYPEOF.finditer(clean):
-        hits.append(("UNITY002", source.count("\\n", 0, match.start()) + 1, message))
+        hits.append(("UNITY002", source.count("\n", 0, match.start()) + 1, message))
     return hits
 
 
