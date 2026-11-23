@@ -12,3 +12,4 @@
 *.user
 .DS_Store
 *.slnx
+/unity-qa-sandbox/
