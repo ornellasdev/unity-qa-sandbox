@@ -6,6 +6,8 @@ on:
     paths:
       - 'Assets/**/*.cs'
       - 'scripts/check_csharp.py'
+      - 'scripts/check_unity_patterns.py'
+      - 'scripts/test_unity_patterns.py'
       - '.github/workflows/csharp-static-analysis.yml'
   pull_request:
     paths:
@@ -36,5 +38,11 @@ jobs:
       - name: Install pinned C# parser
         run: python -m pip install -r scripts/csharp-static-requirements.txt
 
+      - name: Run Unity heuristics regression tests
+        run: python -m unittest discover -s scripts -p 'test_unity_patterns.py' -v
+
       - name: Analyze Unity C# source
         run: python scripts/check_csharp.py
+
+      - name: Check Unity-specific code patterns (advisory)
+        run: python scripts/check_unity_patterns.py
