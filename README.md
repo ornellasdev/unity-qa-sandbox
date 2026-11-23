@@ -94,7 +94,7 @@ Evidence/
 
 **C# source analysis:** [C# Static Analysis](.github/workflows/csharp-static-analysis.yml) parses Unity C# scripts with Tree-sitter and detects syntax errors without a Unity license. Trailing whitespace and tabs are advisory warnings. **The first successful C# static analysis run and a subsequent green run after the Node.js 24 action upgrade were reported by the repository owner.** See [analysis guide](Docs/CSHARP_STATIC_ANALYSIS.md). This is not Roslyn analysis or Unity compilation.
 
-**Unity-specific code-quality checks:** [Unity code quality guide](Docs/UNITY_CODE_QUALITY.md) documents five advisory checks for legacy object search, unchecked component member access, and frequent lookups in frame callbacks. Eight standard-library regression tests protect the checker. These checks are integrated into C# Static Analysis; the first updated workflow run is **not yet verified**.
+**Unity-specific code-quality checks:** [Unity code quality guide](Docs/UNITY_CODE_QUALITY.md) documents five advisory checks for legacy object search, unchecked component member access, and frequent lookups in frame callbacks. Eight standard-library regression tests protect the checker. These checks are integrated into C# Static Analysis; the expanded workflow **passed on GitHub Actions** (owner screenshot: 17s, five advisory UNITY002 warnings).
 
 **Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
 
@@ -125,7 +125,9 @@ Evidence/
 - [x] Confirm C# analysis and repository validation remained green after Node.js 24 action updates (owner-reported)
 - [ ] Inspect latest post-upgrade logs to confirm no remaining Node.js/whitespace warnings
 - [x] Add Unity-specific C# quality heuristics and regression tests ([guide](Docs/UNITY_CODE_QUALITY.md))
-- [ ] Confirm the expanded C# Static Analysis workflow completes successfully and review annotations
+- [x] Confirm expanded C# Static Analysis workflow passed (owner screenshot: 17s)
+- [x] Review five UNITY002 annotations: four in the scene builder, one in full-scene test; no confirmed bugs
+- [ ] Refine UNITY002 heuristics to recognize guaranteed primitive components and prior assertions
 - [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
 - [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
 
