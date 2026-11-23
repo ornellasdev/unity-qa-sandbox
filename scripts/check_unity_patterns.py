@@ -21,8 +21,6 @@ FRAME_METHOD = re.compile(
 RULES = (
     ("UNITY001", re.compile(r"\b(?:FindObjectOfType|FindObjectsOfType)\s*(?:<|\()"),
      "Legacy object search API; evaluate FindFirstObjectByType/FindAnyObjectByType or FindObjectsByType for your Unity version."),
-    ("UNITY002", re.compile(r"\b(?:GetComponent\s*<[^>\n]+>\s*\(\s*\)|GetComponent\s*\(\s*typeof\([^()]+\)\s*\))\s*\."),
-     "Immediate member access on GetComponent result without a null check; verify the component is always present."),
 )
 FRAME_RULES = (
     ("UNITY003", re.compile(r"\b(?:GetComponent|GetComponentInChildren|GetComponentInParent)\s*(?:<|\()"),
@@ -112,9 +110,106 @@ def frame_spans(clean: str) -> list[tuple[int, int]]:
     return spans
 
 
+
+# UNITY002 only suppresses a warning when the guarantee appears in the same
+# enclosing method, before the member access, and the receiver has not been
+# assigned again. It does not attempt whole-program data-flow analysis.
+DIRECT_COMPONENT = re.compile(
+    r"(?:(?P<receiver>\\b[A-Za-z_]\\w*)\\s*\\.\\s*)?"
+    r"GetComponent\\s*<\\s*(?P<component>[A-Za-z_]\\w*(?:\\.[A-Za-z_]\\w*)*)\\s*>\\s*\\(\\s*\\)\\s*\\."
+)
+DIRECT_COMPONENT_TYPEOF = re.compile(
+    r"\\bGetComponent\\s*\\(\\s*typeof\\([^()]+\\)\\s*\\)\\s*\\."
+)
+METHOD_DECL = re.compile(
+    r"\\b(?:public|private|protected|internal)\\s+"
+    r"(?:(?:static|virtual|override|sealed|async|new)\\s+)*"
+    r"[A-Za-z_][\\w<>\\[\\],.?]*\\s+[A-Za-z_]\\w*\\s*"
+    r"\\([^;{}]*\\)\\s*\\{"
+)
+PRIMITIVE_TYPES = {
+    "Cube": {"BoxCollider", "Renderer", "MeshRenderer"},
+    "Sphere": {"SphereCollider", "Renderer", "MeshRenderer"},
+    "Capsule": {"CapsuleCollider", "Renderer", "MeshRenderer"},
+    "Cylinder": {"CapsuleCollider", "Renderer", "MeshRenderer"},
+    "Plane": {"MeshCollider", "Renderer", "MeshRenderer"},
+    "Quad": {"MeshCollider", "Renderer", "MeshRenderer"},
+}
+
+
+def method_body_at(clean: str, offset: int) -> tuple[int, int] | None:
+    """Return the smallest enclosing method body from recognized declarations."""
+    enclosing = []
+    for match in METHOD_DECL.finditer(clean, 0, offset):
+        start = match.end()
+        depth = 1
+        pos = start
+        while pos < len(clean) and depth:
+            if clean[pos] == "{":
+                depth += 1
+            elif clean[pos] == "}":
+                depth -= 1
+            pos += 1
+        if start <= offset < pos - 1 and depth == 0:
+            enclosing.append((start, pos - 1))
+    return max(enclosing, key=lambda span: span[0]) if enclosing else None
+
+
+def guaranteed_component(clean: str, match: re.Match[str]) -> bool:
+    receiver = match.group("receiver")
+    component = match.group("component")
+    if not receiver:
+        return False
+
+    enclosing = method_body_at(clean, match.start())
+    if enclosing is None:
+        return False
+    prefix = clean[enclosing[0]:match.start()]
+    name = re.escape(receiver)
+    typ = re.escape(component)
+
+    # Recognize an earlier NUnit assertion on exactly the same receiver/type.
+    # Do not suppress if the receiver was subsequently reassigned.
+    assertions = list(re.finditer(
+        rf"\\bAssert\\s*\\.\\s*NotNull\\s*\\(\\s*{name}\\s*\\.\\s*"
+        rf"GetComponent\\s*<\\s*{typ}\\s*>\\s*\\(\\s*\\)\\s*\\)",
+        prefix,
+    ))
+    for assertion in reversed(assertions):
+        tail = prefix[assertion.end():]
+        if not re.search(rf"\\b{name}\\s*=(?!=)", tail):
+            return True
+
+    # GameObject.CreatePrimitive guarantees certain built-in components.
+    # Only recognize the named variable initialized in the current method.
+    for primitive in re.finditer(
+        rf"\\b(?:GameObject\\s+|var\\s+){name}\\s*=\\s*"
+        r"GameObject\\s*\\.\\s*CreatePrimitive\\s*\\(\\s*"
+        r"PrimitiveType\\s*\\.\\s*(\\w+)\\s*\\)",
+        prefix,
+    ):
+        if component not in PRIMITIVE_TYPES.get(primitive.group(1), set()):
+            continue
+        tail = prefix[primitive.end():]
+        if not re.search(rf"\\b{name}\\s*=(?!=)", tail):
+            return True
+    return False
+
+
+def component_access_findings(clean: str, source: str) -> list[tuple[str, int, str]]:
+    message = "Immediate member access on GetComponent result without a null check; verify the component is always present."
+    hits = []
+    for match in DIRECT_COMPONENT.finditer(clean):
+        if not guaranteed_component(clean, match):
+            hits.append(("UNITY002", source.count("\\n", 0, match.start()) + 1, message))
+    for match in DIRECT_COMPONENT_TYPEOF.finditer(clean):
+        hits.append(("UNITY002", source.count("\\n", 0, match.start()) + 1, message))
+    return hits
+
+
 def analyze(source: str) -> list[tuple[str, int, str]]:
     clean = masked_source(source)
-    findings = []
+    findings = component_access_findings(clean, source)
     for rule, pattern, message in RULES:
         for match in pattern.finditer(clean):
             findings.append((rule, source.count("\n", 0, match.start()) + 1, message))
