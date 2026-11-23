@@ -14,14 +14,30 @@ using UnityQASandbox;
 public class FullSceneIntegrationTests
 {
     private const string ScenePath = "Assets/Scenes/QASandbox.unity";
+    private Scene loadedScene;
+
+    [UnityTearDown]
+    public IEnumerator TearDown()
+    {
+        // Always release the loaded test scene, including after an assertion failure.
+        if (loadedScene.IsValid() && loadedScene.isLoaded)
+        {
+            AsyncOperation unload = SceneManager.UnloadSceneAsync(loadedScene);
+            if (unload != null)
+                yield return unload;
+        }
+    }
 
     [UnityTest]
     public IEnumerator PLAY007_FullSceneLoadsAndHasRequiredGameplayComponents()
     {
-        Scene scene = EditorSceneManager.LoadSceneInPlayMode(
+        // Additive prevents this test from replacing the scene and physics
+        // context used by other Play Mode tests in the same Test Runner run.
+        loadedScene = EditorSceneManager.LoadSceneInPlayMode(
             ScenePath,
-            new LoadSceneParameters(LoadSceneMode.Single)
+            new LoadSceneParameters(LoadSceneMode.Additive)
         );
+        Scene scene = loadedScene;
 
         for (int frame = 0; frame < 120 && !scene.isLoaded; frame++)
             yield return null;
