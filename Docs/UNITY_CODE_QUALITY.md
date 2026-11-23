@@ -16,7 +16,7 @@ It checks C# files in `Assets/` using Python's standard library. It does not run
 
 **Important:** These are **review prompts**, not proof of bugs. For example, `UNITY002` may be safe when a required component is declared with `[RequireComponent]`, and `Camera.main` is not automatically a performance issue in modern Unity.
 
-The checker masks comments and string literals and checks scoped per-frame method bodies to reduce false positives. It is not a complete parser and may miss conditional compilation, complex C# syntax or indirect calls.
+The checker masks comments and string literals and checks scoped per-frame method bodies to reduce false positives. **UNITY002 now also recognizes** built-in collider/renderer components on objects created with `GameObject.CreatePrimitive(...)` in the same method and an earlier `Assert.NotNull(receiver.GetComponent<T>(), optionalMessage)` on the same receiver/type. These suppressions are conservative: the analyzer still flags accesses if the receiver is reassigned or the guarantee appears in another method. This is not a control-flow or type-system proof. It is not a complete parser and may miss conditional compilation, complex C# syntax or indirect calls.
 
 ## Run locally (CachyOS)
 
@@ -40,5 +40,7 @@ In the GitHub Actions workflow, unit tests for the checker run first. The scanne
 - [x] Integrate into GitHub Actions C# workflow
 - [x] Confirm updated workflow completed successfully (owner screenshot)
 - [x] Review five UNITY002 findings (four scene-builder primitives; one prior-asserted PlayerHealth test access)
-- [ ] Improve UNITY002 to account for prior assertions and components guaranteed by primitive creation
+- [x] Implement UNITY002 suppression for prior NUnit assertions and components supplied by primitive creation
+- [x] Add eight regression cases for safe and unsafe scenarios (16 total)
+- [ ] Verify new CI run passes and inspect whether the original five UNITY002 warnings disappear
 - [ ] Consider richer Roslyn-based analysis with proper Unity references in the future
