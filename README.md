@@ -1,155 +1,156 @@
 # Unity QA Sandbox 🎮🧪
 
-**Original Unity 6 gameplay prototype + Technical Game QA portfolio**  
-By [Yuri Ornellas](https://github.com/ornellasdev)
+**Original Unity gameplay prototype • Technical Game QA • Test automation • CI evidence**  
+Created and maintained by [Yuri Ornellas](https://github.com/ornellasdev)
 
-[![Unity](https://img.shields.io/badge/Unity-6.6-222?logo=unity)](https://unity.com/)
-![C#](https://img.shields.io/badge/Code-C%23-512BD4)
-![QA](https://img.shields.io/badge/QA-Manual%20%2B%20Automated-blue)
+[![Unity](https://img.shields.io/badge/Unity-6.6-222222?logo=unity)](https://unity.com/)
+![C#](https://img.shields.io/badge/C%23-Gameplay%20%26%20NUnit-512BD4)
+![QA](https://img.shields.io/badge/QA-Manual%20%2B%20Automated-1678B7)
 [![Repository Validation](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/repository-validation.yml/badge.svg)](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/repository-validation.yml)
 [![C# Static Analysis](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/csharp-static-analysis.yml/badge.svg)](https://github.com/ornellasdev/unity-qa-sandbox/actions/workflows/csharp-static-analysis.yml)
-![Unity CI](https://img.shields.io/badge/Unity%20CI-License%20pending-lightgrey)
 
-This repository demonstrates an **original, playable graybox prototype** alongside manual test cases, C# NUnit tests, physics-trigger integration checks, a serialized-scene test, regression investigations, and documented local test runs.
+> **Latest verified Unity Test Runner result — RUN-007:** **29/29 tests passed locally** (**22 Edit Mode + 7 Play Mode**), supported by two screenshots committed to this repository.  
+> **Latest verified license-free CI result:** **35/35 Python analyzer regression tests passed**, **98.1% Python analyzer line coverage**, **13 C# files checked**, and **0 C# syntax, style, or Unity-heuristic findings** ([GitHub Actions run](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102487210)).  
+> **Scope matters:** Python analyzer coverage is **not Unity/C# gameplay coverage**. Unity's NUnit suites have **not** been verified running in hosted GitHub Actions.
 
-> **Current result:** **16 distinct automated test methods passed locally** — 9 Edit Mode + 7 Play Mode. These results were observed in Unity Test Runner; **CI workflow is published but has not completed a verified run**.
+## Project overview
 
-## 🎯 Gameplay prototype
+Unity QA Sandbox is an original, playable 3D graybox project built to demonstrate **gameplay programming and a structured technical QA workflow** on software the author controls. The repository includes gameplay source code, formal manual cases, NUnit tests, physics-trigger checks, scene integration tests, bug investigation, negative-path tests, and reproducible test reports.
 
-- WASD/arrow-key movement and Space to jump
-- Collidable obstacles and floor
-- Damage trigger and player health
-- Checkpoint activation and respawn
-- Editor tool to create a demo scene, plus the committed scene at `Assets/Scenes/QASandbox.unity`
+**Gameplay systems**
+- WASD movement, grounded jumping, and collision obstacles.
+- Health, damage triggers, checkpoints, and player respawn.
+- Health recovery on respawn, plus overflow-safe `Heal(int.MaxValue)`.
+- A committed playable scene at `Assets/Scenes/QASandbox.unity` and an Editor scene-builder tool.
 
-## 🧪 Test coverage
+## Test strategy and results
 
-| Suite | Coverage | Latest documented result |
+| Layer | What it checks | Verified result |
 |---|---|---|
-| **Edit Mode / NUnit** | Health model (7), checkpoint model (2) | **9/9 PASS** — RUN-001; reconfirmed by tester in RUN-003 |
-| **Play Mode / components** | Direct damage, lethal damage/respawn, checkpoint position (PLAY001–003) | **3/3 PASS** within RUN-006 retest |
-| **Play Mode / physics** | Trigger damage, trigger-driven respawn, checkpoint followed by hazard (PLAY004–006) | **3/3 PASS** within RUN-006 retest |
-| **Play Mode / full scene** | Required QASandbox objects, colliders, scripts and scene configuration (PLAY007) | **1/1 PASS** within RUN-006 retest |
-| **Manual functional QA** | Movement, jump/double-jump prevention, collision, initial respawn, checkpoint respawn and health restoration | **4/4 formal cases reported PASS** — RUN-002 |
+| **Unity Edit Mode — NUnit** | `HealthModel` boundaries, invalid inputs, saturation, reset; `CheckpointModel` positions and activation | **22/22 PASS — local RUN-007** (17 health + 5 checkpoint) |
+| **Unity Play Mode — NUnit / UnityTest** | Damage, health restoration, checkpoint state, physical triggers, full scene components | **7/7 PASS — local RUN-007** |
+| **Manual functional QA** | Movement, collision, jump / double-jump prevention, initial respawn, checkpoint respawn | **4 formal cases / 8 checks reported PASS — RUN-002**; video supports damage and health-reset flow, not every scenario |
+| **C# syntax and hygiene CI** | Tree-sitter C# syntax, whitespace, Unity-specific heuristic warnings | **13 files, 0 findings — GitHub Actions run 45102487210** |
+| **Python analyzer regression CI** | Correctness of the independent Unity-pattern checking script | **35/35 PASS, 98.1% Python line coverage — same CI run** |
+| **Repository validation CI** | Unity `.meta` consistency, required files, JSON/asmdef checks, generated-output hygiene | **Passing workflow confirmed** |
 
-**Important:** The RUN-006 first attempt reported **4 passed / 3 failed**. After changing scene loading to **Additive** with teardown, the subsequent local retest reported **7 passed / 0 failed**. The suspected scene-isolation cause was not independently proven; both the failure and successful retest are preserved in the report.
+The **29 Unity tests** and the **35 Python analyzer tests** are separate test suites. Neither number represents test cases run inside the other environment.
 
-## 📸 Evidence and reports
+### Quality engineering highlights
 
-| Run | Purpose | Documentation | Screenshot |
+- **Negative paths and boundaries:** 13 additional Edit Mode cases introduced in [RUN-007](Docs/TEST_EXECUTION_REPORT_RUN-007.md), covering invalid health amounts, zero operations, damage after death, large healing values, and checkpoint edge cases.
+- **Regression investigation:** [RUN-006](Docs/TEST_EXECUTION_REPORT_RUN-006.md) records an initial **4/7** Play Mode result and subsequent **7/7** success after adjusting scene loading/teardown. Both outcomes are retained for transparency.
+- **Unity-focused static checks:** Five advisory rules (`UNITY001`–`UNITY005`) detect legacy searches, risky direct component access, and potentially costly frame-loop lookups. False-positive reduction is covered by analyzer regression tests.
+- **Evidence-first reporting:** GitHub Actions produces `QA_SUMMARY.md`, `coverage.xml`, syntax logs, Unity pattern logs, and test logs as downloadable artifacts, without a Unity license.
+
+## Evidence and execution reports
+
+| Run | Focus | Report | Evidence |
 |---|---|---|---|
-| RUN-001 | Edit Mode baseline | [Report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) | [RUN-001.png](Evidence/RUN-001.png) |
-| RUN-002 | Manual gameplay | [Report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) | Not yet uploaded |
-| RUN-003 | Regression after damage/respawn fix | [Report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) | Not yet uploaded |
-| RUN-004 | First 3 Play Mode tests | [Report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) | [RUN-004.png](Evidence/RUN-004.png) |
-| RUN-005 | 6 Play Mode tests, including physics triggers | [Report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) | [RUN-005.png](Evidence/RUN-005.png) |
-| RUN-006 | Full-scene test + failure investigation + retest | [Report](Docs/TEST_EXECUTION_REPORT_RUN-006.md) | [RUN-006.png](Evidence/RUN-006.png) |
+| **RUN-001** | Baseline Edit Mode tests | [Report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) | [Screenshot](Evidence/RUN-001.png) |
+| **RUN-002** | Manual gameplay: movement, jump, collision, damage, respawn | [Report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) | [Gameplay and respawn video](Evidence/RUN-002-Gameplay-Respawn.mp4) — partial visual coverage |
+| **RUN-003** | Regression following damage/respawn fix | [Report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) | Screenshot evidence pending |
+| **RUN-004** | First three Play Mode tests | [Report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) | [Screenshot](Evidence/RUN-004.png) |
+| **RUN-005** | Physics-trigger test expansion | [Report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) | [Screenshot](Evidence/RUN-005.png) |
+| **RUN-006** | Full-scene integration and retest | [Report](Docs/TEST_EXECUTION_REPORT_RUN-006.md) | [Screenshot](Evidence/RUN-006.png) |
+| **RUN-007** | Negative cases and complete regression | [Report](Docs/TEST_EXECUTION_REPORT_RUN-007.md) | [Evidence 1](Evidence/RUN-007(1).png) · [Evidence 2](Evidence/RUN-007(2).png) |
 
-All passing test results listed above are from **local tester executions**, not GitHub Actions. The CI workflow is present but awaits license setup and its first verified run. Some earlier runs lack a precisely recorded clean checkout or full environment metadata.
+**Evidence limitations:** RUN-007 screenshots establish the displayed **22/22 Edit Mode** and **7/7 Play Mode** results, but do not show the exact test-time Git commit or a clean working tree. The RUN-002 video includes the damage/health restoration sequence; formal movement, collision, double-jump, and distinct initial/checkpoint respawn observations remain tester-reported unless separately recorded.
 
-## 🛠️ Tech stack
+## GitHub Actions — what runs without Unity
 
-- **Engine:** Unity 6.6 (6000.6.10f1)
-- **Language:** C#
-- **Testing:** Unity Test Framework, NUnit, `[UnityTest]`, `CharacterController`, trigger colliders
-- **Development/testing OS:** CachyOS (Linux)
-- **Version control:** Git + GitHub
+| Workflow | Scope | Licensing |
+|---|---|---|
+| [Repository Validation](.github/workflows/repository-validation.yml) | Required project structure, asset metadata, JSON and assembly definitions | **No Unity license required** |
+| [C# Static Analysis](.github/workflows/csharp-static-analysis.yml) | C# syntax, advisory Unity code rules, 35 Python regression tests, Python coverage gate (≥85%), QA report artifact | **No Unity license required** |
+| [Unity QA Tests](.github/workflows/unity-tests.yml) | Scaffold for hosted Edit Mode and Play Mode Unity testing | **Not enabled/verified; authorized CI licensing required** |
 
-## ▶️ Open and run
+**Verified CI evidence:** [run 45102487210](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102487210) passed with **35/35** Python tests and **98.1%** analyzer coverage (**156/159** executable Python lines). It scanned **13** C# files and reported **zero** syntax errors, style warnings, and Unity-pattern findings. The Node.js 24-compatible artifact upload also completed without the prior deprecation warning.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ornellasdev/unity-qa-sandbox.git
-   ```
-2. Open the cloned folder in **Unity Hub**, using Unity **6000.6.10f1** when possible.
-3. Allow package import/compilation to finish. This project's movement code uses the legacy Input Manager API; set **Active Input Handling** to **Both** or **Input Manager (Old)** if necessary.
-4. Open `Assets/Scenes/QASandbox.unity`, then press **Play**.
-5. Open **Window → General → Test Runner** and run **EditMode** and **PlayMode** separately.
+[Static QA artifact guide](Docs/STATIC_QA_REPORTS.md) · [C# analysis guide](Docs/CSHARP_STATIC_ANALYSIS.md) · [Unity rule reference](Docs/UNITY_CODE_QUALITY.md) · [Unity CI setup](Docs/CI_SETUP.md)
 
-The Play Mode full-scene check uses Editor-only scene loading; it is intended for the Unity Editor Test Runner, not a player build.
+## Technology
 
-## 📂 Key folders
+- **Engine:** Unity 6.6, project editor version `6000.6.10f1`
+- **Gameplay language:** C#
+- **Unity tests:** NUnit, Unity Test Framework, Edit Mode, Play Mode and `[UnityTest]`
+- **CI / QA utilities:** GitHub Actions, Python 3.12, Tree-sitter C#, `coverage.py`
+- **Development and testing:** CachyOS Linux, Unity Editor, Git and GitHub
+
+## Run the project and tests locally
+
+```bash
+git clone https://github.com/ornellasdev/unity-qa-sandbox.git
+```
+
+1. Open the repository in **Unity Hub** using editor **6000.6.10f1**, when available.
+2. Allow packages to import. This project uses the legacy Input Manager; use **Active Input Handling → Both** or **Input Manager (Old)** if necessary.
+3. Open `Assets/Scenes/QASandbox.unity`; press **Play** to test movement, damage and checkpoints.
+4. Open **Window → General → Test Runner**. Run **EditMode** and **PlayMode** separately. The current defined suites contain **22 Edit Mode** and **7 Play Mode** tests.
+5. Run license-free checks from the repository root:
+
+```bash
+python3 scripts/validate_unity_repo.py
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r scripts/csharp-static-requirements.txt
+python scripts/check_csharp.py
+python scripts/check_unity_patterns.py
+python -m unittest discover -s scripts -p 'test_unity_patterns.py' -v
+```
+
+The Play Mode full-scene check relies on Unity Editor scene loading. Hosted Unity Test Runner execution remains separate from the license-free CI workflows.
+
+## Repository structure
 
 ```text
 Assets/
   Scenes/QASandbox.unity
   Scripts/
-  Tests/
-    EditMode/
-    PlayMode/Tests/
+  Tests/EditMode/
+  Tests/PlayMode/Tests/
 Docs/
   TEST_PLAN.md
-  BUG_REPORT_TEMPLATE.md
-  TEST_EXECUTION_REPORT_RUN-001.md ... RUN-006.md
+  TEST_EXECUTION_REPORT_RUN-001.md ... RUN-007.md
+  STATIC_QA_REPORTS.md
+  UNITY_CODE_QUALITY.md
 Evidence/
-  RUN-001.png
-  RUN-004.png
-  RUN-005.png
-  RUN-006.png
+  RUN-002-Gameplay-Respawn.mp4
+  RUN-007(1).png
+  RUN-007(2).png
+  (earlier RUN screenshots)
+scripts/
+  check_csharp.py
+  check_unity_patterns.py
+  test_unity_patterns.py
+  validate_unity_repo.py
+  build_qa_report.py
+.github/workflows/
+  repository-validation.yml
+  csharp-static-analysis.yml
+  unity-tests.yml
 ```
 
-## 🤖 Continuous integration
+## Roadmap
 
-**License-free repository checks:** [Repository Validation](.github/workflows/repository-validation.yml) runs automatically on relevant pushes and pull requests. It checks required files, Unity `.meta` consistency, JSON and assembly definitions, project version, and committed generated folders. It requires **no Unity Editor or license**. The first successful GitHub Actions run has been **confirmed by the repository owner's workflow screenshot** (job: `Unity repository static checks`, 7 seconds). See the [static CI guide](Docs/REPOSITORY_CI.md).
+**Delivered**
+- [x] Playable 3D Unity prototype and committed scene.
+- [x] Health, checkpoint, damage and respawn components.
+- [x] **RUN-007: 29/29 locally executed Unity tests passed**, including 13 new negative-path/boundary tests.
+- [x] Evidence-backed manual QA reports, gameplay video, and screenshot collection.
+- [x] License-free repository and C# analysis workflows.
+- [x] **35 Python analyzer tests, 98.1% coverage**, automated QA artifacts and ≥85% coverage threshold.
+- [x] Node.js 24-compatible GitHub Actions dependencies in the active static pipelines.
 
-**C# source analysis:** [C# Static Analysis](.github/workflows/csharp-static-analysis.yml) parses Unity C# scripts with Tree-sitter and detects syntax errors without a Unity license. Trailing whitespace and tabs are advisory warnings. **The first successful C# static analysis run and a subsequent green run after the Node.js 24 action upgrade were reported by the repository owner.** See [analysis guide](Docs/CSHARP_STATIC_ANALYSIS.md). This is not Roslyn analysis or Unity compilation.
+**Next**
+- [ ] Capture additional RUN-002 manual video evidence for collision, double-jump prevention, and separately identified respawn paths.
+- [ ] Add RUN-003 missing screenshots and record full test-time environment/commit metadata on future Unity executions.
+- [ ] Review the locally modified `ProjectSettings/ProjectSettings.asset` before deciding whether to commit or restore it.
+- [ ] Extend negative-path coverage and maintain defect/regression records.
+- [ ] Enable Unity hosted Edit Mode/Play Mode CI **only when an authorized Unity CI licensing setup exists**, then archive actual NUnit XML results.
 
-**Unity-specific code-quality checks:** [Unity code quality guide](Docs/UNITY_CODE_QUALITY.md) documents five advisory checks for legacy object search, unchecked component member access, and frequent lookups in frame callbacks. Sixteen standard-library regression tests protect the checker. After refining UNITY002, the repository owner reported **a green GitHub Actions run with no warnings**. The exact run URL has not been recorded.
+## Contact
 
-**Static QA evidence:** The [C# Static Analysis workflow](.github/workflows/csharp-static-analysis.yml) now generates a per-run Markdown report, diagnostic logs, and **Python analyzer line coverage** in a downloadable GitHub Actions artifact. This is **not C# or gameplay coverage**. See the [reports guide](Docs/STATIC_QA_REPORTS.md). The repository owner reports a successful, warning-free run and provided a screenshot confirming the downloaded `static-qa-evidence` artifact contains all five expected files. The baseline [run 45101652954](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954) measured **76.1% Python analyzer coverage**. The verified [run 45102176871](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102176871) improved to **98% (156/159 Python lines), 35/35 regression tests passing, 13 C# files scanned, and zero static findings**. The GitHub Actions log confirms this; it does not measure Unity gameplay coverage.
+**Yuri Ornellas** · [GitHub](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/) · [Email](mailto:yurivillarornelas@live.com)
 
-**Unity execution (pending):** The separate [Unity QA Tests workflow](.github/workflows/unity-tests.yml) is configured for **Edit Mode** and **Play Mode** with GameCI, but is **gated** and unvalidated until an authorized licensing setup is available. See the [Unity CI setup guide](Docs/CI_SETUP.md). The existing **Unity Student** license has not been configured for CI.
-
-**Negative-path regression expansion (local execution confirmed):** Added **13 new Unity Edit Mode NUnit cases** covering invalid health inputs, saturating heals, repeated damage, and checkpoint boundaries, plus an overflow-safe heal fix. **RUN-007 passed locally: 22/22 Edit Mode + 7/7 Play Mode**, confirmed by two Unity Test Runner screenshots now committed as [RUN-007(1).png](Evidence/RUN-007(1).png) and [RUN-007(2).png](Evidence/RUN-007(2).png). See [RUN-007](Docs/TEST_EXECUTION_REPORT_RUN-007.md).
-
-## 🗺️ Roadmap
-
-### Completed
-- [x] Build original gameplay prototype and commit the scene
-- [x] Implement gameplay health, damage, checkpoint and respawn systems
-- [x] Execute **9 Edit Mode** NUnit tests
-- [x] Execute and document **4 manual functional QA cases**
-- [x] Investigate and publish the damage/respawn fix ([`9406fca`](https://github.com/ornellasdev/unity-qa-sandbox/commit/9406fca3d6fd94abf6375a7043eed573f613af94))
-- [x] Implement **7 Play Mode** tests: components, real triggers and serialized-scene validation
-- [x] Document the RUN-006 failed attempt and successful **7/7** retest
-- [x] Upload evidence for RUN-001, RUN-004, RUN-005 and RUN-006
-
-### Next milestones
-- [x] Publish license-free repository validation on pushes/PRs ([workflow](.github/workflows/repository-validation.yml))
-- [x] Confirm first repository-validation GitHub Actions run succeeds (successful job screenshot reviewed)
-- [ ] Add RUN-002 manual gameplay evidence and RUN-003 regression evidence
-- [ ] Record reproducible build/commit and clean-worktree details for future executions
-- [ ] Evaluate and reconcile Unity `ProjectSettings` differences across environments
-- [x] Publish gated GitHub Actions workflow for Unity **Edit Mode + Play Mode** ([workflow](.github/workflows/unity-tests.yml), [setup instructions](Docs/CI_SETUP.md))
-- [ ] Configure required Unity license secrets privately in GitHub Actions
-- [ ] Verify a successful manual CI run (9 Edit Mode + 7 Play Mode)
-- [ ] Enable automatic push checks with the `UNITY_CI_ENABLED=true` repository variable
-- [x] Publish license-free C# syntax/static hygiene workflow ([workflow](.github/workflows/csharp-static-analysis.yml))
-- [x] Confirm successful C# static analysis GitHub Actions run (owner screenshot reviewed previously)
-- [x] Confirm C# analysis and repository validation remained green after Node.js 24 action updates (owner-reported)
-- [x] Inspect Node.js 24 post-upgrade static-analysis logs: no deprecation or whitespace warnings in [run 45102487210](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102487210)
-- [x] Add Unity-specific C# quality heuristics and regression tests ([guide](Docs/UNITY_CODE_QUALITY.md))
-- [x] Confirm expanded C# Static Analysis workflow passed (owner screenshot: 17s)
-- [x] Review five UNITY002 annotations: four in the scene builder, one in full-scene test; no confirmed bugs
-- [x] Refine UNITY002 heuristics for guaranteed primitive components and preceding NUnit null assertions
-- [x] Add eight regression tests (16 analyzer tests total)
-- [x] Confirm refined C# static analysis passed with no warnings (owner-reported; run URL not yet recorded)
-- [x] Publish static CI QA reports, diagnostic artifacts and Python analyzer coverage ([guide](Docs/STATIC_QA_REPORTS.md))
-- [x] Confirm the static QA reporting workflow completed successfully without warnings (owner-reported)
-- [x] Verify a downloadable `static-qa-evidence` artifact contains the five expected files (owner screenshot)
-- [x] Record verified Python analyzer coverage from uploaded CI artifact: **76.1% (121/159 lines)**, 16/16 tests passing, 0 findings ([run](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45101652954))
-- [x] Add 19 new Python analyzer regression tests (35 total) and configure an 85% Python line-coverage threshold
-- [x] Confirm [run 45102176871](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102176871): 35/35 regression tests PASS, Python analyzer **98% line coverage (156/159)**, 13 C# scripts scanned and 0 Unity findings
-- [x] Upgrade `actions/upload-artifact` to v6 (Node.js 24), verified warning-free in [run 45102487210](https://github.com/ornellasdev/unity-qa-sandbox/actions/runs/45102487210): **35/35**, **98.1%** (156/159 lines), **0 C# syntax/style findings**
-- [ ] Collect and link Unity CI XML/log artifacts after the licensed workflow successfully runs
-- [x] Implement 13 additional NUnit negative-path/boundary tests and overflow-safe heal fix ([RUN-007](Docs/TEST_EXECUTION_REPORT_RUN-007.md))
-- [x] Execute RUN-007 locally: **22/22 Edit Mode and 7/7 Play Mode PASS** (two tester screenshots; [report](Docs/TEST_EXECUTION_REPORT_RUN-007.md))
-- [x] Add both RUN-007 screenshot evidence files to repository ([1](Evidence/RUN-007(1).png), [2](Evidence/RUN-007(2).png))
-- [ ] Record exact Unity editor build, tested commit SHA and clean-worktree status for RUN-007
-- [x] Triage RUN-007 test outcomes: no failures observed in the 29 tests displayed; no Unity CI execution claimed
-
-## 📫 Contact
-
-[GitHub](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/) · [Email](mailto:yurivillarornelas@live.com)
-
-*Built as a learning and recruitment portfolio. This is personal project experience, not paid studio QA experience.*
+*This is a personal learning and recruitment portfolio. Local Unity test results and Python-based GitHub Actions metrics are documented separately; they do not imply paid studio QA experience or hosted Unity test execution.*
