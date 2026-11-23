@@ -1,0 +1,40 @@
+name: C# Static Analysis (No Unity License)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Assets/**/*.cs'
+      - 'scripts/check_csharp.py'
+      - '.github/workflows/csharp-static-analysis.yml'
+  pull_request:
+    paths:
+      - 'Assets/**/*.cs'
+      - 'scripts/check_csharp.py'
+      - '.github/workflows/csharp-static-analysis.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  csharp-analysis:
+    name: Parse C# and check code hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/csharp-static-requirements.txt
+
+      - name: Install pinned C# parser
+        run: python -m pip install -r scripts/csharp-static-requirements.txt
+
+      - name: Analyze Unity C# source
+        run: python scripts/check_csharp.py
