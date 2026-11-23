@@ -14,22 +14,34 @@ Edit Mode includes 17 `HealthModelTests` and 5 `CheckpointModelTests`. Play Mode
 
 ## Environment traceability
 
-- Target platform: CachyOS Linux.
-- Unity version entered in capture command: `6000.6.10f1`; the exact running Editor build is **not independently visible** in the Test Runner screenshots.
-- A screenshot of terminal output shows `git pull --ff-only origin main` completed, then the **before** snapshot was generated using `scripts/capture_qa_environment.py --run-id RUN-008 --phase before --unity-editor 6000.6.10f1`.
-- Commit printed by the script: `4b1b8396d96e7e1e68e33143768e50fd13834e6f`.
-- Working-tree status at before capture: **DIRTY**, including a previously known local `ProjectSettings/ProjectSettings.asset` modification (the complete snapshot file has not yet been provided for inspection).
-- An **after** snapshot was initially created immediately after the before snapshot, **before the displayed Unity test execution**. Therefore, that initial after snapshot is **not adequate evidence of post-test state**.
-- The tester **reran the after-snapshot command after the displayed Unity tests**. The subsequent terminal screenshot confirms creation of `Evidence/Traceability/RUN-008-after.md`, HEAD `4b1b8396d96e7e1e68e33143768e50fd13834e6f`, and **DIRTY** working tree. The snapshot contents are not yet inspected or committed to GitHub.
-- The displayed Git status after the command shows `M ProjectSettings/ProjectSettings.asset` and `?? Evidence/Traceability/`. A partial `git diff` displayed changes to Apple platform version settings, including iOS, tvOS, and macOS targets; the full diff was not provided, so these changes should not be classified as harmless without review.
-- Exact local Unity project files open during testing, SHA of modified configuration contents, and whether files changed during tests: **not independently established**.
+The two original Markdown snapshots were inspected directly in GitHub and are linked below.
+
+| Field | Before | After |
+|---|---|---|
+| Timestamp (UTC-03:00) | `2026-11-23T00:21:21-03:00` | `2026-11-23T00:24:36-03:00` |
+| HEAD commit | `4b1b8396d96e7e1e68e33143768e50fd13834e6f` | Same |
+| Branch / upstream | `main` / `origin/main` | Same |
+| Git working tree | **DIRTY** | **DIRTY** |
+| Modified tracked file | `ProjectSettings/ProjectSettings.asset` | Same path |
+| Other Git status | No other entries in snapshot | `?? Evidence/Traceability/` |
+| Project Unity editor version | `6000.6.10f1` | Same |
+| Running Unity editor version (tester-entered) | `6000.6.10f1` | Same |
+| OS / kernel | `Linux 7.3.5-2-cachyos` | Same |
+
+- [Before snapshot](../Evidence/Traceability/RUN-008-before.md)
+- [After snapshot](../Evidence/Traceability/RUN-008-after.md)
+
+**Interpretation:** The two snapshots bracket the tester-provided Unity screenshots and establish the reported Git HEAD and dirty working-tree state at the capture times. They do **not** prove that `ProjectSettings/ProjectSettings.asset` had identical content at both times or that the exact running Editor build was independently visible in the Test Runner screenshots. The Unity version is grounded in the project configuration and tester-entered capture values. A previous premature after-snapshot was replaced by the tester after the test execution.
+
+A partial `git diff` displayed Apple platform-target configuration differences, including iOS, tvOS and macOS settings. Its full contents and relevance to the Unity tests have not been reviewed; do not discard this local modification merely to obtain a clean status.
 
 ## Evidence
 
-- Edit Mode: user-provided Unity Test Runner screenshot showing **22 passed / 0 failed**; not yet committed to GitHub as RUN-008 evidence.
-- Play Mode: user-provided Unity Test Runner screenshot showing **7 passed / 0 failed**; not yet committed to GitHub as RUN-008 evidence.
-- Optional NUnit XML exports: not provided.
-- No Unity runtime CI execution is claimed.
+- [RUN-008(1).png — Edit Mode](../Evidence/RUN-008(1).png): 22 passed, 0 failed; duration 0.009s.
+- [RUN-008(2).png — Play Mode](../Evidence/RUN-008(2).png): 7 passed, 0 failed; duration 1.168s.
+- [Before snapshot](../Evidence/Traceability/RUN-008-before.md) and [after snapshot](../Evidence/Traceability/RUN-008-after.md): original execution environment records, committed.
+- Optional NUnit XML exports were not provided.
+- These results are from the **local Unity Editor**, not hosted Unity test CI.
 
 ## Completion checklist
 
@@ -37,9 +49,10 @@ Edit Mode includes 17 `HealthModelTests` and 5 `CheckpointModelTests`. Play Mode
 - [x] Observe Play Mode 7/7 PASS screenshot.
 - [x] Observe before-snapshot command and commit output.
 - [x] Re-run after snapshot **after** test execution (terminal screenshot reviewed).
-- [ ] Inspect `Evidence/Traceability/RUN-008-before.md` and `RUN-008-after.md` (record actual timestamps, status and modified paths).
-- [ ] Commit the two Test Runner screenshot files and traceability snapshots.
+- [x] Inspect both committed before/after snapshots and record actual timestamps, commit, status and modified paths.
+- [x] Confirm both Test Runner screenshots and both traceability snapshots are committed to the repository.
 - [ ] Review local `ProjectSettings/ProjectSettings.asset` changes, without discarding them.
-- [ ] Confirm running Unity version and record optional NUnit XML for the same run.
+- [x] Record project Unity version and tester-entered running Editor version from both snapshots.
+- [ ] Independently verify running Editor build and, optionally, export NUnit XML on a future run.
 
 See [TEST_TRACEABILITY.md](TEST_TRACEABILITY.md) for the capture protocol. This report only attributes results to evidence actually observed.
