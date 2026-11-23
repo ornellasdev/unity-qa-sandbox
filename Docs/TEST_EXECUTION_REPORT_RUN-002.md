@@ -11,7 +11,7 @@
 | Unity Editor | Unity 6.6 (6000.6.10f1) — previously confirmed editor version |
 | Test type | Manual functional gameplay testing |
 | Exact tested commit | Not recorded at time of execution; correction subsequently published as [`9406fca`](https://github.com/ornellasdev/unity-qa-sandbox/commit/9406fca3d6fd94abf6375a7043eed573f613af94) |
-| Evidence | Tester-provided written observations for both scenarios; one Unity Console screenshot shared in conversation (not yet uploaded to repository) |
+| Evidence | Tester-provided observations and supplementary [gameplay / respawn video](../Evidence/RUN-002-Gameplay-Respawn.mp4), committed after the original run |
 
 ## Observed results
 
@@ -39,7 +39,7 @@
 
 ## Limitations and follow-up
 
-- RUN-002 scenario-level results are **tester-reported manual observations**. One Console screenshot was reviewed in chat but is not yet committed to the repository. It shows health recovery to 100, not both scenario identities.
+- RUN-002 scenario-level results are **tester-reported manual observations**. A later [gameplay / respawn video](../Evidence/RUN-002-Gameplay-Respawn.mp4) is committed to the repository; it supports the damage and health-reset sequence but not every scenario. It shows health recovery to 100, not both scenario identities.
 - During testing, the red hazard temporarily stopped triggering respawn. The tester edited `PlayerRespawn.cs` and `DamageZone.cs` locally, and then provided Console evidence of restored trigger, damage, health reset and respawn behavior. **The corrected scripts were subsequently published in commit [`9406fca`](https://github.com/ornellasdev/unity-qa-sandbox/commit/9406fca3d6fd94abf6375a7043eed573f613af94).** The manual tests were performed before this commit was created, so the exact tested commit remains unrecorded. A repeatable regression run against the committed revision is recommended.
 - Do not treat these observations as automated Play Mode test results.
 - Confirm the exact tested Git commit; the repository may have changed after the local run.
@@ -50,3 +50,7 @@
 
 - [Manual test plan](TEST_PLAN.md)
 - [Automated Edit Mode run RUN-001](TEST_EXECUTION_REPORT_RUN-001.md)
+
+## Test-time traceability follow-up
+
+Use the [before/after snapshot procedure](TEST_TRACEABILITY.md) for a **new** run. Previous snapshots or current Git status must not be treated as proof of the exact repository state during this historical test execution.
