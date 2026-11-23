@@ -1,0 +1,48 @@
+name: Repository Validation (No Unity License)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Assets/**'
+      - 'Packages/**'
+      - 'ProjectSettings/**'
+      - 'scripts/validate_unity_repo.py'
+      - '.github/workflows/repository-validation.yml'
+  pull_request:
+    paths:
+      - 'Assets/**'
+      - 'Packages/**'
+      - 'ProjectSettings/**'
+      - 'scripts/validate_unity_repo.py'
+      - '.github/workflows/repository-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-repository:
+    name: Unity repository static checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate Unity repository structure
+        run: python scripts/validate_unity_repo.py
+
+      - name: Verify repository contains no generated Unity output
+        shell: bash
+        run: |
+          if git ls-files | grep -E '(^|/)(Library|Temp|Obj|Builds|Logs)/'; then
+            echo "::error::Generated Unity output was committed. Remove generated files from Git tracking."
+            exit 1
+          fi
+          echo "No tracked Unity generated folders detected."
