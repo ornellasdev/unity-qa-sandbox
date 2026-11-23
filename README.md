@@ -1,66 +1,113 @@
 # Unity QA Sandbox 🎮🧪
 
-An original **Unity 6 + C#** game prototype and technical QA portfolio by **Yuri Ornellas**.
+**Original Unity 6 gameplay prototype + Technical Game QA portfolio**  
+By [Yuri Ornellas](https://github.com/ornellasdev)
 
-**Status:** Game prototype source published. The Edit Mode NUnit suite passed **9/9** in the tester's Unity Test Runner on **2026-11-22**, with [screenshot evidence](Evidence/RUN-001.png). Manual gameplay RUN-002 has **8 tester-reported passing checks**, including health restoration to 100 both with and without an activated checkpoint. The corrected gameplay scripts were published in commit [`9406fca`](https://github.com/ornellasdev/unity-qa-sandbox/commit/9406fca3d6fd94abf6375a7043eed573f613af94); the exact prior test revision and repository-hosted RUN-002 evidence remain pending.
+[![Unity](https://img.shields.io/badge/Unity-6.6-222?logo=unity)](https://unity.com/)
+![C#](https://img.shields.io/badge/Code-C%23-512BD4)
+![QA](https://img.shields.io/badge/QA-Manual%20%2B%20Automated-blue)
+![CI](https://img.shields.io/badge/CI-Not%20configured-lightgrey)
 
-## Features
-- Graybox scene generator: **Tools > QA Sandbox > Create Demo Scene**
-- WASD / arrow-key movement, Space to jump, gravity, collision
-- Health, hazards, checkpoints and respawn
-- **9 NUnit Edit Mode tests** of gameplay models
-- **3 Unity Play Mode component tests** covering damage, death/health restoration, and checkpoint position
-- **3 physics-driven Play Mode tests** for trigger-entry damage, lethal respawn, and checkpoint-trigger recovery (**6/6 Play Mode tests passed in RUN-005; screenshot reviewed in chat**)
-- **PLAY007 full-scene integration check** loads the serialized QASandbox scene and validates required objects and components (**PASS in RUN-006 retest**)
-- English test plans and execution reports
+This repository demonstrates an **original, playable graybox prototype** alongside manual test cases, C# NUnit tests, physics-trigger integration checks, a serialized-scene test, regression investigations, and documented local test runs.
 
-## Setup
-1. Open the complete Unity project using **Unity 6.6 (6000.6.10f1)** (the editor version used by the tester).
-2. Set **Active Input Handling** to **Both** or **Input Manager (Old)** under Project Settings > Player if necessary.
-3. Open `Assets/Scenes/QASandbox.unity`; generate via **Tools > QA Sandbox > Create Demo Scene** if it does not exist.
-4. Press **Play** and test movement, jump, collisions, hazard and checkpoint.
-5. Open **Window > General > Test Runner**, choose **Edit Mode**, then **Run All**.
+> **Current result:** **16 distinct automated test methods passed locally** — 9 Edit Mode + 7 Play Mode. These results were observed in Unity Test Runner; **CI is not configured**.
 
-## Test status
+## 🎯 Gameplay prototype
 
-| Coverage | Type | Status |
+- WASD/arrow-key movement and Space to jump
+- Collidable obstacles and floor
+- Damage trigger and player health
+- Checkpoint activation and respawn
+- Editor tool to create a demo scene, plus the committed scene at `Assets/Scenes/QASandbox.unity`
+
+## 🧪 Test coverage
+
+| Suite | Coverage | Latest documented result |
 |---|---|---|
-| Health logic (7 methods) | NUnit Edit Mode | ✅ 7/7 Passed — screenshot reviewed |
-| Checkpoint logic (2 methods) | NUnit Edit Mode | ✅ 2/2 Passed — screenshot reviewed |
-| Gameplay components (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-004 screenshot published |
-| Physics trigger interactions (3 methods) | Unity Play Mode | ✅ 3/3 Passed — RUN-005 screenshot reviewed in chat |
-| Full serialized QASandbox scene (PLAY007) | Unity Play Mode / Editor | ✅ PASS in initial RUN-006 |
-| Full seven-test regression suite | Unity Play Mode | ✅ RUN-006 retest: 7 passed, 0 failed (initial attempt: 4 passed, 3 failed) |
-| WASD movement, jump, collision, checkpoint respawn, airborne double-jump prevention, initial-spawn respawn | Manual | ✅ 6 observed checks passed — tester reported |
-| Full-health restoration at initial spawn and activated checkpoint | Manual | ✅ 2 scenarios passed — tester reported; Console screenshot reviewed in chat |
+| **Edit Mode / NUnit** | Health model (7), checkpoint model (2) | **9/9 PASS** — RUN-001; reconfirmed by tester in RUN-003 |
+| **Play Mode / components** | Direct damage, lethal damage/respawn, checkpoint position (PLAY001–003) | **3/3 PASS** within RUN-006 retest |
+| **Play Mode / physics** | Trigger damage, trigger-driven respawn, checkpoint followed by hazard (PLAY004–006) | **3/3 PASS** within RUN-006 retest |
+| **Play Mode / full scene** | Required QASandbox objects, colliders, scripts and scene configuration (PLAY007) | **1/1 PASS** within RUN-006 retest |
+| **Manual functional QA** | Movement, jump/double-jump prevention, collision, initial respawn, checkpoint respawn and health restoration | **4/4 formal cases reported PASS** — RUN-002 |
 
-**Automated Edit Mode result:** 9 passed, 0 failed (100%) in RUN-001. **RUN-002:** Eight gameplay observations passed. **RUN-003 regression (tester-reported against fix `9406fca`):** initial respawn PASS, checkpoint respawn PASS, Edit Mode 9/9 PASS. Evidence and clean working tree confirmation for RUN-003 remain pending.
+**Important:** The RUN-006 first attempt reported **4 passed / 3 failed**. After changing scene loading to **Additive** with teardown, the subsequent local retest reported **7 passed / 0 failed**. The suspected scene-isolation cause was not independently proven; both the failure and successful retest are preserved in the report.
 
-**Total distinct automated test methods reported passed across Edit Mode and Play Mode: 16 (9 + 7)**. Tests were run locally, not in CI.
+## 📸 Evidence and reports
 
-🖼️ [Test Runner evidence](Evidence/RUN-001.png) · 📄 [RUN-001 automated report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) · [RUN-002 manual report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) · [RUN-003 regression report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) · [RUN-004 Play Mode report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) · [RUN-005 physics integration report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) · [RUN-006 failure and successful retest](Docs/TEST_EXECUTION_REPORT_RUN-006.md) · [Manual test plan](Docs/TEST_PLAN.md) · [Bug report template](Docs/BUG_REPORT_TEMPLATE.md)
+| Run | Purpose | Documentation | Screenshot |
+|---|---|---|---|
+| RUN-001 | Edit Mode baseline | [Report](Docs/TEST_EXECUTION_REPORT_RUN-001.md) | [RUN-001.png](Evidence/RUN-001.png) |
+| RUN-002 | Manual gameplay | [Report](Docs/TEST_EXECUTION_REPORT_RUN-002.md) | Not yet uploaded |
+| RUN-003 | Regression after damage/respawn fix | [Report](Docs/TEST_EXECUTION_REPORT_RUN-003.md) | Not yet uploaded |
+| RUN-004 | First 3 Play Mode tests | [Report](Docs/TEST_EXECUTION_REPORT_RUN-004.md) | [RUN-004.png](Evidence/RUN-004.png) |
+| RUN-005 | 6 Play Mode tests, including physics triggers | [Report](Docs/TEST_EXECUTION_REPORT_RUN-005.md) | [RUN-005.png](Evidence/RUN-005.png) |
+| RUN-006 | Full-scene test + failure investigation + retest | [Report](Docs/TEST_EXECUTION_REPORT_RUN-006.md) | [RUN-006.png](Evidence/RUN-006.png) |
 
-> RUN-001 has screenshot evidence of local Unity Test Runner results, not independent CI validation. RUN-002 is based on tester-reported manual observations, with Console screenshot reviewed in chat but not yet uploaded to the repository. Environment: **CachyOS (Linux)** and **Unity 6.6 (6000.6.10f1)**; exact tested commit is not recorded.
+All results are from **local tester executions**, not GitHub Actions. Some earlier runs lack a precisely recorded clean checkout or full environment metadata.
 
-## Roadmap
-- [x] Gameplay components and automated tests authored
-- [x] First Edit Mode execution: 9/9 passed with screenshot evidence
-- [x] Test environment recorded: CachyOS Linux / Unity 6.6 (6000.6.10f1)
-- [x] Eight manual gameplay checks reported as passing in RUN-002, including both health restoration scenarios
-- [x] Publish trigger/respawn fix: `9406fca`
-- [x] Tester-reported regression RUN-003 on fix commit `9406fca`: 3/3 checks passed
-- [ ] Confirm clean working tree and attach new RUN-003 evidence
-- [ ] Upload RUN-002 Console/gameplay evidence to the repository
-- [x] Add and locally run three gameplay-component Play Mode tests, published in `3f602ea`
-- [x] Upload RUN-004 screenshot to the repository
-- [x] Add physics-trigger Play Mode test source (PLAY004–PLAY006)
-- [x] Execute six Play Mode tests: 6/6 PASS (RUN-005 screenshot reviewed in chat)
-- [ ] Upload RUN-005 screenshot to GitHub and record exact tested commit
-- [x] Add PLAY007 serialized scene validation test source
-- [x] Execute PLAY007: passed in initial RUN-006
-- [x] Record initial RUN-006 failure: 4 passed, 3 failed
-- [x] Rerun all seven Play Mode tests after scene-isolation change: 7/7 PASS
-- [ ] Upload RUN-006 retest screenshot and confirm tested working tree
-- [ ] Add CI for Unity test suites
+## 🛠️ Tech stack
 
-**Author:** [Yuri Ornellas](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/)
+- **Engine:** Unity 6.6 (6000.6.10f1)
+- **Language:** C#
+- **Testing:** Unity Test Framework, NUnit, `[UnityTest]`, `CharacterController`, trigger colliders
+- **Development/testing OS:** CachyOS (Linux)
+- **Version control:** Git + GitHub
+
+## ▶️ Open and run
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ornellasdev/unity-qa-sandbox.git
+   ```
+2. Open the cloned folder in **Unity Hub**, using Unity **6000.6.10f1** when possible.
+3. Allow package import/compilation to finish. This project's movement code uses the legacy Input Manager API; set **Active Input Handling** to **Both** or **Input Manager (Old)** if necessary.
+4. Open `Assets/Scenes/QASandbox.unity`, then press **Play**.
+5. Open **Window → General → Test Runner** and run **EditMode** and **PlayMode** separately.
+
+The Play Mode full-scene check uses Editor-only scene loading; it is intended for the Unity Editor Test Runner, not a player build.
+
+## 📂 Key folders
+
+```text
+Assets/
+  Scenes/QASandbox.unity
+  Scripts/
+  Tests/
+    EditMode/
+    PlayMode/Tests/
+Docs/
+  TEST_PLAN.md
+  BUG_REPORT_TEMPLATE.md
+  TEST_EXECUTION_REPORT_RUN-001.md ... RUN-006.md
+Evidence/
+  RUN-001.png
+  RUN-004.png
+  RUN-005.png
+  RUN-006.png
+```
+
+## 🗺️ Roadmap
+
+### Completed
+- [x] Build original gameplay prototype and commit the scene
+- [x] Implement gameplay health, damage, checkpoint and respawn systems
+- [x] Execute **9 Edit Mode** NUnit tests
+- [x] Execute and document **4 manual functional QA cases**
+- [x] Investigate and publish the damage/respawn fix ([`9406fca`](https://github.com/ornellasdev/unity-qa-sandbox/commit/9406fca3d6fd94abf6375a7043eed573f613af94))
+- [x] Implement **7 Play Mode** tests: components, real triggers and serialized-scene validation
+- [x] Document the RUN-006 failed attempt and successful **7/7** retest
+- [x] Upload evidence for RUN-001, RUN-004, RUN-005 and RUN-006
+
+### Next milestones
+- [ ] Add RUN-002 manual gameplay evidence and RUN-003 regression evidence
+- [ ] Record reproducible build/commit and clean-worktree details for future executions
+- [ ] Evaluate and reconcile Unity `ProjectSettings` differences across environments
+- [ ] Add a GitHub Actions workflow for Unity **Edit Mode + Play Mode** testing, including runner/license configuration and private credentials
+- [ ] Export/publish machine-readable test results and CI artifacts after the workflow is working
+- [ ] Extend functional and negative-path coverage; track any newly reproduced bugs
+
+## 📫 Contact
+
+[GitHub](https://github.com/ornellasdev) · [LinkedIn](https://www.linkedin.com/in/yurivillarornelas/) · [Email](mailto:yurivillarornelas@live.com)
+
+*Built as a learning and recruitment portfolio. This is personal project experience, not paid studio QA experience.*
