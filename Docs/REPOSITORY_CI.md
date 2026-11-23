@@ -35,10 +35,14 @@ It runs on changes to `Assets/**`, `Packages/**`, `ProjectSettings/**`, the vali
 
 **Important:** Static validation cannot detect compile errors, gameplay defects, Unity asset serialization errors, or failed NUnit tests. The `9 Edit Mode + 7 Play Mode` passing results are from local Unity executions, not this workflow.
 
+## First verified execution
+
+The repository owner provided a GitHub Actions screenshot showing **Unity repository static checks — succeeded (7s)**. The generated-folder check reported `No tracked Unity generated folders detected.` This verifies the repository-validation workflow completed successfully; it does **not** verify Unity Editor compilation or gameplay tests. The exact workflow run URL/ID has not been recorded in this document.
+
 ## Roadmap
 
 - [x] Publish license-free validation script and workflow
-- [ ] Confirm the first GitHub Actions run succeeds
+- [x] Confirm the first GitHub Actions run succeeds (screenshot reviewed)
 - [ ] Require this check on pull requests after initial validation
 - [ ] Add optional C# formatting/linting after verifying Unity-compatible tooling
 - [ ] Separately resolve authorized licensing and runtime for Unity test execution
