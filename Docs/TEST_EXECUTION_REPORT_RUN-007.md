@@ -52,3 +52,7 @@
 ## CI scope
 
 The GitHub Actions static-analysis workflow can parse changed C# files and check the repository structure **without opening Unity**. A green static check is **not** evidence of NUnit success, a compiled Unity project, or C# gameplay coverage.
+
+## Test-time traceability follow-up
+
+Use the [before/after snapshot procedure](TEST_TRACEABILITY.md) for a **new** run. Previous snapshots or current Git status must not be treated as proof of the exact repository state during this historical test execution.
