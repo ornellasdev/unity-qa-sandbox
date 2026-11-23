@@ -60,3 +60,7 @@ A new screenshot shared in chat displays the Unity Console with the following me
 - [RUN-002 — manual gameplay testing](TEST_EXECUTION_REPORT_RUN-002.md)
 - [Manual test plan](TEST_PLAN.md)
 - [Fix commit `9406fca`](https://github.com/ornellasdev/unity-qa-sandbox/commit/9406fca3d6fd94abf6375a7043eed573f613af94)
+
+## Test-time traceability follow-up
+
+Use the [before/after snapshot procedure](TEST_TRACEABILITY.md) for a **new** run. Previous snapshots or current Git status must not be treated as proof of the exact repository state during this historical test execution.
