@@ -22,10 +22,15 @@ The workflow executes Python's `coverage` tool while testing the analyzer. **Thi
 
 The reports are per-run artifacts; they are **not** a permanent public historical dashboard. GitHub retention may remove older artifacts. For a portfolio-longitudinal dashboard, a later step can aggregate verified run results without inventing a history.
 
+## Latest confirmation
+
+The repository owner reported a successful, warning-free run of the updated C# static analysis workflow. The report artifact and its precise Python coverage metric have not yet been inspected; success alone does not establish their presence or value.
+
 ## Current state
 
 - [x] Publish artifact generation and workflow summary
 - [x] Add Python analyzer line-coverage export
-- [ ] Confirm a successful run with the new artifact
+- [x] Confirm a successful run of the updated workflow (owner-reported)
+- [ ] Verify the `static-qa-evidence` artifact exists and contains the expected files
 - [ ] Record a verified example run URL and its actual coverage percentage
 - [ ] Add Unity C# and gameplay coverage only after licensed Unity tests can run
