@@ -1,0 +1,74 @@
+name: Unity QA Tests
+
+# Enable automatic runs by setting the repository Actions variable
+# UNITY_CI_ENABLED to 'true' after configuring Unity licensing secrets.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'Assets/**'
+      - 'Packages/**'
+      - 'ProjectSettings/**'
+      - '.github/workflows/unity-tests.yml'
+
+permissions:
+  contents: read
+  checks: write
+
+concurrency:
+  group: unity-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unity-tests:
+    name: Unity ${{ matrix.testMode }}
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.UNITY_CI_ENABLED == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix:
+        testMode: [EditMode, PlayMode]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate license configuration
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        shell: bash
+        run: |
+          if [[ -z "$UNITY_LICENSE" || -z "$UNITY_EMAIL" || -z "$UNITY_PASSWORD" ]]; then
+            echo "::error::Set UNITY_LICENSE, UNITY_EMAIL and UNITY_PASSWORD in Settings > Secrets and variables > Actions before running Unity CI."
+            exit 1
+          fi
+
+      # v4.3.2 includes the Docker shared-memory fix needed by Unity 6.6+.
+      - name: Run Unity ${{ matrix.testMode }} tests
+        id: tests
+        uses: game-ci/unity-test-runner@v4.3.2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: .
+          unityVersion: 6000.6.10f1
+          testMode: ${{ matrix.testMode }}
+          artifactsPath: artifacts/${{ matrix.testMode }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Unity ${{ matrix.testMode }} Test Results
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-${{ matrix.testMode }}-results
+          path: artifacts/${{ matrix.testMode }}
+          if-no-files-found: warn
+          retention-days: 14
